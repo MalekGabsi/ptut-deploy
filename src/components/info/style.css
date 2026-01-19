@@ -1,0 +1,195 @@
+/* =========================================================
+   PLUS INFOS — Professional style
+   Consistent with Home (ocean / iceberg / light)
+========================================================= */
+
+.plusinfos{
+  min-height: 100vh;
+  background:
+    radial-gradient(1200px 600px at 70% -10%, rgba(255,255,255,0.18), transparent 60%),
+    linear-gradient(
+      to bottom,
+      #0b3a5c 0%,
+      #0e4b73 30%,
+      #e9f6ff 100%
+    );
+  color: #0f172a;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
+
+/* =========================
+   Topbar (glass / ice)
+========================= */
+.plusinfos .topbar{
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  padding: 16px 18px;
+
+  background: rgba(255,255,255,0.65);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(255,255,255,0.45);
+}
+
+.plusinfos .topbar h1{
+  font-size: 18px;
+  margin: 0;
+  font-weight: 600;
+  color: #0b3a5c;
+}
+
+/* Back button */
+.plusinfos .back{
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  padding: 8px 12px;
+  border-radius: 14px;
+
+  text-decoration: none;
+  color: #0b3a5c;
+  font-weight: 500;
+
+  background: rgba(255,255,255,0.85);
+  border: 1px solid rgba(11,58,92,0.15);
+
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+
+.plusinfos .back:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(11,58,92,0.18);
+}
+
+/* =========================
+   Layout
+========================= */
+.plusinfos .container{
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 28px 18px 42px;
+
+  display: grid;
+  gap: 22px;
+}
+
+/* =========================
+   Cards (ice glass)
+========================= */
+.plusinfos .card{
+  background: rgba(255,255,255,0.88);
+  backdrop-filter: blur(10px);
+
+  border-radius: 22px;
+  padding: 18px 20px;
+
+  border: 1px solid rgba(255,255,255,0.6);
+  box-shadow:
+    0 18px 42px rgba(11,58,92,0.16),
+    inset 0 1px 0 rgba(255,255,255,0.6);
+}
+
+.plusinfos .card h2{
+  margin: 0 0 10px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #0b3a5c;
+}
+
+.plusinfos .card p{
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* Muted text */
+.plusinfos .muted{
+  color: rgba(15, 23, 42, 0.65);
+  font-size: 14px;
+  margin-top: 6px;
+}
+
+/* =========================
+   Logos grid
+========================= */
+.plusinfos .logos{
+  margin-top: 14px;
+
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+@media (min-width: 720px){
+  .plusinfos .logos{
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.plusinfos .logo{
+  margin: 0;
+  padding: 14px 12px;
+
+  border-radius: 18px;
+  background: rgba(255,255,255,0.9);
+  border: 1px solid rgba(11,58,92,0.12);
+
+  display: grid;
+  place-items: center;
+  gap: 8px;
+
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.plusinfos .logo:hover{
+  transform: translateY(-3px);
+  box-shadow: 0 16px 30px rgba(11,58,92,0.18);
+}
+
+.plusinfos .logo img{
+  max-width: 100%;
+  max-height: 56px;
+  object-fit: contain;
+}
+
+.plusinfos .logo figcaption{
+  font-size: 12px;
+  color: rgba(11,58,92,0.7);
+}
+
+/* =========================
+   Team list
+========================= */
+.plusinfos .list{
+  margin: 8px 0 0;
+  padding-left: 18px;
+}
+
+.plusinfos .list li{
+  margin: 4px 0;
+}
+
+/* =========================
+   Footer
+========================= */
+.plusinfos .footer{
+  padding: 22px 16px 32px;
+  text-align: center;
+}
+
+.plusinfos .footer .muted{
+  color: rgba(11,58,92,0.55);
+}
+
+/* =========================
+   Accessibility
+========================= */
+@media (prefers-reduced-motion: reduce){
+  .plusinfos *{
+    transition: none !important;
+  }
+}
