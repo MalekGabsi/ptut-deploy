@@ -1,195 +1,536 @@
 /* =========================================================
-   PLUS INFOS — Professional style
-   Consistent with Home (ocean / iceberg / light)
+   PLUS D'INFOS — Redesign based on Adobe XD mockups
+   Light blue / ocean / childlike theme for NF1 children
 ========================================================= */
 
-.plusinfos{
+@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Nunito:wght@400;600;700&display=swap');
+
+/* =========================
+   Page base
+========================= */
+.plusinfos {
   min-height: 100vh;
-  background:
-    radial-gradient(1200px 600px at 70% -10%, rgba(255,255,255,0.18), transparent 60%),
-    linear-gradient(
-      to bottom,
-      #0b3a5c 0%,
-      #0e4b73 30%,
-      #e9f6ff 100%
-    );
-  color: #0f172a;
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  background: #d9f0fc;
+  color: #1a3a4a;
+  font-family: 'Nunito', system-ui, -apple-system, sans-serif;
+  overflow-x: hidden;
+}
+
+.plusinfos * {
+  box-sizing: border-box;
+}
+
+/* Headings use playful font */
+.plusinfos h1,
+.plusinfos h2,
+.plusinfos h3 {
+  font-family: 'Patrick Hand', cursive;
+  color: #2e5f7e;
 }
 
 /* =========================
-   Topbar (glass / ice)
+   Hero / Header
 ========================= */
-.plusinfos .topbar{
-  position: sticky;
-  top: 0;
-  z-index: 10;
+.pi-hero {
+  position: relative;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 12px;
-
-  padding: 16px 18px;
-
-  background: rgba(255,255,255,0.65);
-  backdrop-filter: blur(14px);
-  border-bottom: 1px solid rgba(255,255,255,0.45);
+  justify-content: center;
+  padding: 30px 20px 40px;
+  text-align: center;
+  min-height: 360px;
 }
 
-.plusinfos .topbar h1{
-  font-size: 18px;
-  margin: 0;
-  font-weight: 600;
-  color: #0b3a5c;
-}
-
-/* Back button */
-.plusinfos .back{
+.pi-hero__back {
+  position: absolute;
+  top: 20px;
+  left: 20px;
   display: inline-flex;
   align-items: center;
   gap: 6px;
-
-  padding: 8px 12px;
+  padding: 10px 16px;
   border-radius: 14px;
-
   text-decoration: none;
-  color: #0b3a5c;
-  font-weight: 500;
-
-  background: rgba(255,255,255,0.85);
-  border: 1px solid rgba(11,58,92,0.15);
-
+  color: #2e5f7e;
+  font-weight: 600;
+  font-size: 15px;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(46, 95, 126, 0.15);
   transition: transform 160ms ease, box-shadow 160ms ease;
 }
 
-.plusinfos .back:hover{
-  transform: translateY(-1px);
-  box-shadow: 0 10px 24px rgba(11,58,92,0.18);
+.pi-hero__back:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(46, 95, 126, 0.18);
+}
+
+.pi-hero__title-img {
+  max-width: 340px;
+  width: 60%;
+  height: auto;
+  margin-bottom: 10px;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.1));
+}
+
+.pi-hero__iceberg {
+  max-width: 280px;
+  width: 50%;
+  height: auto;
+  filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.12));
+}
+
+.pi-hero__sign {
+  max-width: 120px;
+  width: 25%;
+  height: auto;
+  margin-top: -30px;
+  margin-left: 20px;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.12));
 }
 
 /* =========================
-   Layout
+   Section base
 ========================= */
-.plusinfos .container{
+.pi-section {
   max-width: 960px;
   margin: 0 auto;
-  padding: 28px 18px 42px;
+  padding: 40px 24px;
+}
 
-  display: grid;
-  gap: 22px;
+.pi-section h2 {
+  font-size: 28px;
+  margin: 0 0 18px;
+  text-align: center;
+}
+
+.pi-section p {
+  line-height: 1.75;
+  font-size: 15px;
+  margin: 0 0 12px;
+}
+
+/* Card wrapper */
+.pi-card {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(8px);
+  border-radius: 24px;
+  padding: 28px 26px;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 12px 36px rgba(46, 95, 126, 0.1);
 }
 
 /* =========================
-   Cards (ice glass)
+   Le Projet
 ========================= */
-.plusinfos .card{
-  background: rgba(255,255,255,0.88);
-  backdrop-filter: blur(10px);
-
-  border-radius: 22px;
-  padding: 18px 20px;
-
-  border: 1px solid rgba(255,255,255,0.6);
-  box-shadow:
-    0 18px 42px rgba(11,58,92,0.16),
-    inset 0 1px 0 rgba(255,255,255,0.6);
+.pi-projet {
+  padding-top: 20px;
 }
 
-.plusinfos .card h2{
-  margin: 0 0 10px;
-  font-size: 16px;
-  font-weight: 600;
-  color: #0b3a5c;
+/* =========================
+   Qui sommes-nous
+========================= */
+.pi-team {
+  padding-top: 10px;
 }
 
-.plusinfos .card p{
+.pi-team__intro {
+  margin-bottom: 28px;
+}
+
+/* Profile cards */
+.pi-profiles {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-top: 24px;
+}
+
+.pi-profile {
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(8px);
+  border-radius: 24px;
+  padding: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 8px 28px rgba(46, 95, 126, 0.1);
+}
+
+.pi-profile__photo {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: #c8e4f5;
+  flex-shrink: 0;
+  object-fit: cover;
+  border: 3px solid #fff;
+  box-shadow: 0 4px 12px rgba(46, 95, 126, 0.15);
+}
+
+.pi-profile__info h3 {
+  margin: 0 0 8px;
+  font-size: 22px;
+}
+
+.pi-profile__info p {
   margin: 0;
-  line-height: 1.6;
-}
-
-/* Muted text */
-.plusinfos .muted{
-  color: rgba(15, 23, 42, 0.65);
+  line-height: 1.65;
   font-size: 14px;
-  margin-top: 6px;
+  color: #3a5a6a;
 }
 
 /* =========================
-   Logos grid
+   Ils nous soutiennent (dark blue)
 ========================= */
-.plusinfos .logos{
-  margin-top: 14px;
+.pi-supporters {
+  background: #2e5f7e;
+  padding: 50px 24px;
+  margin-top: 40px;
+}
 
+.pi-supporters h2 {
+  color: #fff;
+  font-size: 30px;
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+.pi-supporters__grid {
+  max-width: 900px;
+  margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 14px;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 28px;
+  justify-items: center;
 }
 
-@media (min-width: 720px){
-  .plusinfos .logos{
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
+.pi-supporter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  transition: transform 200ms ease;
 }
 
-.plusinfos .logo{
-  margin: 0;
-  padding: 14px 12px;
+.pi-supporter:hover {
+  transform: translateY(-4px);
+}
 
-  border-radius: 18px;
-  background: rgba(255,255,255,0.9);
-  border: 1px solid rgba(11,58,92,0.12);
-
+.pi-supporter__logo {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: #fff;
   display: grid;
   place-items: center;
-  gap: 8px;
-
-  transition: transform 180ms ease, box-shadow 180ms ease;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
 }
 
-.plusinfos .logo:hover{
-  transform: translateY(-3px);
-  box-shadow: 0 16px 30px rgba(11,58,92,0.18);
-}
-
-.plusinfos .logo img{
-  max-width: 100%;
-  max-height: 56px;
+.pi-supporter__logo img {
+  max-width: 70%;
+  max-height: 70%;
   object-fit: contain;
 }
 
-.plusinfos .logo figcaption{
-  font-size: 12px;
-  color: rgba(11,58,92,0.7);
+.pi-supporter__name {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 13px;
+  text-align: center;
+  max-width: 140px;
+  font-family: 'Patrick Hand', cursive;
 }
 
 /* =========================
-   Team list
+   Autres ressources
 ========================= */
-.plusinfos .list{
-  margin: 8px 0 0;
-  padding-left: 18px;
+.pi-resources {
+  padding-top: 40px;
 }
 
-.plusinfos .list li{
-  margin: 4px 0;
+.pi-resources__centres {
+  margin-bottom: 24px;
+}
+
+.pi-resources__list {
+  list-style: none;
+  padding: 0;
+  margin: 16px 0 0;
+  display: grid;
+  gap: 10px;
+}
+
+.pi-resources__list li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 14px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.pi-resources__list li::before {
+  content: '🏥';
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.pi-resources__links {
+  margin-top: 24px;
+}
+
+.pi-resources__links h3 {
+  font-size: 20px;
+  margin: 0 0 14px;
+}
+
+.pi-link-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 14px;
+}
+
+.pi-link-card {
+  display: block;
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 16px;
+  border: 1px solid rgba(46, 95, 126, 0.1);
+  text-decoration: none;
+  color: inherit;
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.pi-link-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(46, 95, 126, 0.15);
+}
+
+.pi-link-card__title {
+  font-weight: 700;
+  color: #2e5f7e;
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+
+.pi-link-card__desc {
+  font-size: 13px;
+  color: #4a6a7a;
+  line-height: 1.55;
+  margin: 0;
+}
+
+/* =========================
+   Quelques vidéos
+========================= */
+.pi-videos {
+  padding-top: 40px;
+}
+
+.pi-videos h2 {
+  margin-bottom: 24px;
+}
+
+.pi-videos__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.pi-video-card {
+  position: relative;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #bbb;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  aspect-ratio: 16 / 9;
+}
+
+.pi-video-card iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.pi-video-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 16px;
+  text-decoration: none;
+  color: #2e5f7e;
+  font-weight: 600;
+  font-size: 14px;
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.pi-video-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(46, 95, 126, 0.15);
+}
+
+.pi-video-link::before {
+  content: '▶';
+  font-size: 18px;
+}
+
+/* =========================
+   Quelques lectures
+========================= */
+.pi-books {
+  padding-top: 40px;
+  padding-bottom: 20px;
+}
+
+.pi-books h2 {
+  margin-bottom: 24px;
+}
+
+.pi-books__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.pi-book-card {
+  display: flex;
+  gap: 16px;
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 8px 24px rgba(46, 95, 126, 0.1);
+  text-decoration: none;
+  color: inherit;
+  transition: transform 200ms ease, box-shadow 200ms ease;
+}
+
+.pi-book-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 36px rgba(46, 95, 126, 0.18);
+}
+
+.pi-book-card__cover {
+  width: 80px;
+  height: 110px;
+  border-radius: 10px;
+  background: #c8e4f5;
+  flex-shrink: 0;
+  object-fit: cover;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.pi-book-card__info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.pi-book-card__title {
+  font-family: 'Patrick Hand', cursive;
+  font-size: 17px;
+  color: #2e5f7e;
+  margin: 0;
+}
+
+.pi-book-card__author {
+  font-size: 12px;
+  color: #6a8a9a;
+  margin: 0;
+}
+
+.pi-book-card__desc {
+  font-size: 13px;
+  color: #3a5a6a;
+  line-height: 1.5;
+  margin: 4px 0 0;
+  /* clamp to 3 lines */
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 /* =========================
    Footer
 ========================= */
-.plusinfos .footer{
-  padding: 22px 16px 32px;
+.pi-footer {
   text-align: center;
+  padding: 30px 16px 40px;
+  color: #6a8a9a;
+  font-size: 14px;
 }
 
-.plusinfos .footer .muted{
-  color: rgba(11,58,92,0.55);
+/* =========================
+   Responsive
+========================= */
+@media (max-width: 640px) {
+  .pi-hero {
+    min-height: 260px;
+    padding: 24px 16px 30px;
+  }
+
+  .pi-hero__title-img {
+    max-width: 240px;
+    width: 75%;
+  }
+
+  .pi-hero__iceberg {
+    max-width: 200px;
+    width: 65%;
+  }
+
+  .pi-section {
+    padding: 28px 16px;
+  }
+
+  .pi-section h2 {
+    font-size: 24px;
+  }
+
+  .pi-profile {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .pi-profile__photo {
+    width: 80px;
+    height: 80px;
+  }
+
+  .pi-supporters__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .pi-videos__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pi-books__grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* =========================
    Accessibility
 ========================= */
-@media (prefers-reduced-motion: reduce){
-  .plusinfos *{
+@media (prefers-reduced-motion: reduce) {
+  .plusinfos * {
     transition: none !important;
+    animation: none !important;
   }
 }
