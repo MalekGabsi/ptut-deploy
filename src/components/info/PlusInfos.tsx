@@ -41,75 +41,102 @@ export default function PlusInfos() {
 
       {/* ========================= QUI SOMMES-NOUS ========================= */}
       <section className="pi-section pi-team">
-        <h2>Qui sommes-nous</h2>
+        <h2>Qui sommes-nous ?</h2>
         <div className="pi-card pi-team__intro">
           <p>
-            Le contenu des supports a été créé par l'équipe du <strong>CERENEF-Ped</strong>, centre de référence
-            des neurofibromatoses France pédiatrique du CHU de Toulouse. Un centre de référence est un centre reconnu
-            expert dans la pathologie. Il en existe plusieurs en France.
+            Les contenus proposés dans CapitNF1 ont été conçus par l'équipe du <strong>CERENEF-Ped</strong>,
+            centre de référence des neurofibromatoses pédiatriques du CHU de Toulouse.
           </p>
           <p>
-            À Toulouse, il est composé d'une équipe pluriprofessionnelle incluant des médecins (neuropédiatres),
-            d'une psychologue et d'une neuropsychologue, d'une assistante sociale, d'une secrétaire médicale
-            et de personnels de recherche. Les membres de cette équipe sont formés et ont des compétences
-            spécifiques dans la NF1 qui leur permettent de coordonner les actrices et acteurs de « seconde ligne »
-            disponibles selon les cas pour assurer à l'enfant un parcours de soins personnalisé (ophtalmologues,
-            endocrinologues, orthopédistes, neuro-oncologues, généticiens, dermatologues…).
+            Un centre de référence est une structure reconnue pour son expertise dans une maladie spécifique.
+            Son rôle est d'accompagner les patients et leurs familles grâce à une prise en charge spécialisée et coordonnée.
           </p>
           <p>
-            Tous ces acteurs ont participé à la création des supports de CapitNF1. Le contenu proposé à l'enfant
-            est donc rigoureux, complet, adapté et réalisé par des professionnels experts et compétents qui
-            travaillent tous les jours au contact des enfants atteints de NF1.
+            À Toulouse, le CERENEF-Ped réunit une équipe pluriprofessionnelle composée de neuropédiatres,
+            d'une psychologue, d'une neuropsychologue, d'une assistante sociale, d'une assistante médico-administrative
+            et de personnels de recherche. Ensemble, ils accompagnent les enfants atteints de neurofibromatose de type 1
+            (NF1) en coordonnant les différents professionnels de santé impliqués dans leur suivi : ophtalmologues,
+            endocrinologues, orthopédistes, neuro-oncologues, généticiens, dermatologues et bien d'autres.
+          </p>
+          <p>
+            Les supports CapitNF1 ont été élaborés avec ces professionnels afin de proposer un contenu fiable,
+            adapté aux enfants et conforme aux connaissances médicales actuelles.
+          </p>
+          <p>
+            Pour concevoir un outil accessible et compréhensible par les plus jeunes, l'équipe du CERENEF-Ped
+            s'est également entourée de spécialistes du design, du développement web et de la médiation numérique.
+            Cette collaboration a permis de transformer des informations médicales complexes en contenus pédagogiques
+            interactifs, pensés pour faciliter la compréhension, rassurer les enfants et accompagner les familles
+            au quotidien.
           </p>
         </div>
 
-        {/* Profils */}
-        <div className="pi-profiles">
-          <div className="pi-profile">
-            <div className="pi-profile__photo" aria-hidden="true" />
-            <div className="pi-profile__info">
-              <h3>Maëlle Biotteau</h3>
-              <p>
-                Co-commanditaire du projet CAPITNF1 — chercheuse au sein du laboratoire ToNIC (Toulouse NeuroImaging Center)
-                de l'INSERM, spécialisée dans la prise en charge de l'enfant atteint de Neurofibromatose de type 1.
-              </p>
+        {/* Équipe CERENEF-Ped */}
+        <div className="pi-card" style={{ marginTop: '24px' }}>
+          <h3>L'équipe du CERENEF-Ped</h3>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '16px', flexWrap: 'wrap' }}>
+            <img
+              src="/assets/Portrait_Maëlle_Biotteau.JPG"
+              alt="Maëlle Biotteau"
+              style={{ width: '90px', height: '90px', borderRadius: '50%', objectFit: 'cover', border: '3px solid #fff', boxShadow: '0 4px 12px rgba(46,95,126,0.2)', flexShrink: 0 }}
+            />
+            <div>
+              <strong style={{ fontSize: '16px' }}>Maëlle Biotteau</strong><br />
+              <span style={{ fontSize: '14px', color: '#4a6a7a' }}>Cheffe de projet de recherche, Hôpital des Enfants de Toulouse</span>
             </div>
           </div>
+          <ul style={{ marginTop: '8px', paddingLeft: '20px', lineHeight: '1.8' }}>
+            <li><strong>Eloïse Baudou</strong> — Neuropédiatre, Hôpital des Enfants de Toulouse</li>
+            <li><strong>Nadège Carayon</strong> — Assistante sociale, Hôpital des Enfants de Toulouse</li>
+            <li><strong>Yves Chaix</strong> — Neuropédiatre, Hôpital des Enfants de Toulouse</li>
+            <li><strong>Capucine Dalby</strong> — Neuropsychologue, Hôpital des Enfants de Toulouse</li>
+            <li><strong>Bastien Estublier</strong> — Neuropédiatre, Hôpital des Enfants de Toulouse</li>
+            <li><strong>Nathalie Faure Marie</strong> — Psychologue, Hôpital des Enfants de Toulouse</li>
+            <li><strong>Danièle Santamaria</strong> — Assistante médico-administrative, Hôpital des Enfants de Toulouse</li>
+          </ul>
+        </div>
 
-          <div className="pi-profile">
-            <div className="pi-profile__photo" aria-hidden="true" />
-            <div className="pi-profile__info">
-              <h3>Baptiste Vignaud</h3>
-              <p>
-                Co-commanditaire du projet CAPITNF1 — développeur web freelance.
-                Texte de présentation complet à venir.
-              </p>
+        {/* Équipe graphique & web */}
+        <div className="pi-card" style={{ marginTop: '16px' }}>
+          <h3>Équipe graphique, webdesign et développement</h3>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', marginTop: '16px' }}>
+            <div style={{ display: 'flex', alignItems: 'flex-start', gap: '16px' }}>
+              <img
+                src="/assets/maxime.jpg"
+                alt="Maxime Moser"
+                style={{ width: '80px', height: '80px', borderRadius: '50%', objectFit: 'cover', border: '3px solid #fff', boxShadow: '0 4px 12px rgba(46,95,126,0.2)', flexShrink: 0 }}
+              />
+              <div>
+                <strong>Maxime Moser</strong> — Graphiste et dessinateur freelance, diplômé de l'école Condé.<br />
+                <span style={{ fontSize: '14px', color: '#4a6a7a' }}>Il a conçu l'univers visuel de CapitNF1, réalisé les illustrations et les animations vidéo afin de rendre les contenus plus accessibles aux enfants.</span>
+              </div>
             </div>
-          </div>
-
-          <div className="pi-profile">
-            <div className="pi-profile__photo" aria-hidden="true" />
-            <div className="pi-profile__info">
-              <h3>Maxime Moser</h3>
-              <p>
-                Designer en charge de la charte graphique et des éléments visuels du projet CAPITNF1
-                (pictogrammes, illustrations, identité visuelle).
-              </p>
+            <div style={{ display: 'flex', alignItems: 'flex-start', gap: '16px' }}>
+              <img
+                src="/assets/bastide.jpg"
+                alt="Baptiste Vignaud"
+                style={{ width: '80px', height: '80px', borderRadius: '50%', objectFit: 'cover', border: '3px solid #fff', boxShadow: '0 4px 12px rgba(46,95,126,0.2)', flexShrink: 0 }}
+              />
+              <div>
+                <strong>Baptiste Vignaud</strong> — Développeur web freelance, diplômé de l'Université de Limoges.<br />
+                <span style={{ fontSize: '14px', color: '#4a6a7a' }}>Il a développé le site web et réalisé les voix-off pédagogiques du projet, incarnant notamment la voix de CapitNF1.</span>
+              </div>
             </div>
           </div>
         </div>
 
         {/* École ISIS */}
-        <div className="pi-card" style={{ marginTop: '24px' }}>
-          <h3>École ISIS — Ingénierie des Systèmes d'Information en Santé</h3>
+        <div className="pi-card" style={{ marginTop: '16px' }}>
+          <h3>Développement pédagogique et technique — École ISIS</h3>
           <p>
-            Le développement technique de l'interface CapitNF1 a été réalisé dans le cadre d'un projet
-            tutoré par des étudiants de l'école ISIS à Castres (promotion 2027), sous la tutelle d'Arnaud Charron :
+            L'intégration technique et le développement de l'interface CapitNF1 ont été réalisés dans le cadre
+            d'un projet tutoré mené par des étudiants de l'École ISIS — Ingénierie des Systèmes d'Information
+            en Santé (Castres), sous la supervision d'<strong>Arnaud Charron</strong>.
           </p>
-          <ul style={{ marginTop: '8px', paddingLeft: '20px' }}>
-            <li>Yasmine Belarbi — Communication et coordination</li>
-            <li>Ghenima Kadi — Cheffe de projet</li>
-            <li>Malek Gabsi — Développeur, implémentation technique</li>
+          <ul style={{ marginTop: '8px', paddingLeft: '20px', lineHeight: '1.8' }}>
+            <li><strong>Belarbi Yasmine</strong> — Développement et Communication et coordination</li>
+            <li><strong>Ghenima Kadi</strong> — Cheffe de projet</li>
+            <li><strong>Malek Gabsi</strong> — Développement et implémentation technique</li>
           </ul>
         </div>
       </section>
@@ -117,7 +144,7 @@ export default function PlusInfos() {
       {/* ========================= ILS NOUS SOUTIENNENT ========================= */}
       <section className="pi-supporters">
         <h2>Ils nous soutiennent</h2>
-        <div className="pi-supporters__grid">
+        <div className="pi-supporters__grid pi-supporters__grid--3x2">
           <a className="pi-supporter" href="https://www.chu-toulouse.fr/" target="_blank" rel="noopener noreferrer">
             <div className="pi-supporter__logo">
               <img src="/assets/CHU.png" alt="CHU Toulouse" />
@@ -129,14 +156,14 @@ export default function PlusInfos() {
             <div className="pi-supporter__logo">
               <img src="/assets/inserm.png" alt="Inserm / ToNIC" />
             </div>
-            <span className="pi-supporter__name">Inserm / ToNIC — Toulouse NeuroImaging Center</span>
+            <span className="pi-supporter__name">Inserm / ToNIC</span>
           </a>
 
           <a className="pi-supporter" href="https://www.fondation-groupama.com/" target="_blank" rel="noopener noreferrer">
             <div className="pi-supporter__logo">
               <img src="/assets/Groupama.png" alt="Fondation Groupama" />
             </div>
-            <span className="pi-supporter__name">Fondation Groupama &laquo;&nbsp;Vaincre les Maladies Rares&nbsp;&raquo;</span>
+            <span className="pi-supporter__name">Fondation Groupama</span>
           </a>
 
           <a className="pi-supporter" href="https://lesgladiateurs.org/" target="_blank" rel="noopener noreferrer">
@@ -150,7 +177,7 @@ export default function PlusInfos() {
             <div className="pi-supporter__logo">
               <img src="/assets/Ose.png" alt="ANR France" />
             </div>
-            <span className="pi-supporter__name">Association Neurofibromatoses et Recklinghausen</span>
+            <span className="pi-supporter__name">Neurofibromatoses et Recklinghausen</span>
           </a>
 
           <a className="pi-supporter" href="https://isis.univ-jfc.fr/" target="_blank" rel="noopener noreferrer">
@@ -172,13 +199,13 @@ export default function PlusInfos() {
             en tous les cas de concert :
           </p>
           <ul className="pi-resources__list">
-            <li>Centre de référence maladies rares constitutif CERENEF de Paris (AP-HP, Hôpital de la Pitié-Salpêtrière)</li>
-            <li>Centre de référence maladies rares NF1 de l'enfant de Nantes</li>
-            <li>Centre de référence maladies rares NF1 de l'enfant de Toulouse</li>
-            <li>Centre de référence maladies rares NF1 de l'enfant de Lyon</li>
+            <li><a href="https://cerenef.org/" target="_blank" rel="noopener noreferrer">Centre de référence maladies rares constitutif CERENEF de Paris (AP-HP, Hôpital de la Pitié-Salpêtrière)</a></li>
+            <li><a href="https://www.chu-nantes.fr/la-nf1-1" target="_blank" rel="noopener noreferrer">Centre de référence maladies rares NF1 de l'enfant de Nantes</a></li>
+            <li><a href="https://www.chu-toulouse.fr/neurofibromatose-de-type-1-nf1" target="_blank" rel="noopener noreferrer">Centre de référence maladies rares NF1 de l'enfant de Toulouse</a></li>
+            <li><a href="https://www.chu-lyon.fr/service-neurologie-oncologie" target="_blank" rel="noopener noreferrer">Centre de référence maladies rares NF1 de l'enfant de Lyon</a></li>
           </ul>
           <p style={{ marginTop: '16px' }}>
-            Le CERENEF-Ped fait partie de la <strong>Filière santé maladies rares dermatologiques (Fimarad)</strong> qui
+            Le CERENEF-Ped fait partie de la <a href="https://fimarad.org/" target="_blank" rel="noopener noreferrer"><strong>Filière santé maladies rares dermatologiques (Fimarad)</strong></a> qui
             comprend plusieurs centres de référence et de compétence de plusieurs maladies rares dermatologiques.
           </p>
         </div>
@@ -294,23 +321,17 @@ export default function PlusInfos() {
               allowFullScreen
             />
           </div>
+          <div className="pi-video-card">
+            <iframe
+              src="https://www.youtube.com/embed/RlNOUx9o8Lo"
+              title="La Petite Casserole d'Anatole"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
+          </div>
         </div>
 
-        {/* Liens vidéos supplémentaires */}
-        <div style={{ marginTop: '20px', display: 'flex', flexDirection: 'column', gap: '10px', maxWidth: '900px', marginLeft: 'auto', marginRight: 'auto' }}>
-          <a className="pi-video-link" href="https://www.anrfrance.fr/page/2981797-tom-et-son-doudou" target="_blank" rel="noopener noreferrer">
-            Tom et son doudou — ANR France
-          </a>
-          <a className="pi-video-link" href="https://www.youtube.com/results?search_query=la+petite+casserole+d+anatole" target="_blank" rel="noopener noreferrer">
-            La Petite Casserole d'Anatole
-          </a>
-          <a className="pi-video-link" href="https://www.gerneurofibromatosis.ch/cynthia-brousse-temoigne/" target="_blank" rel="noopener noreferrer">
-            Cynthia Brousse témoigne — GER-NF
-          </a>
-          <a className="pi-video-link" href="https://www.gerneurofibromatosis.ch/le-divorce-de-la-jambe-de-guillaume/" target="_blank" rel="noopener noreferrer">
-            Le divorce de la jambe de Guillaume — GER-NF
-          </a>
-        </div>
+
       </section>
 
       {/* ========================= QUELQUES LECTURES ========================= */}

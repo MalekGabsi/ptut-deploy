@@ -32,7 +32,7 @@ export default function Bateau() {
                 onClick={open}
                 aria-label="Ouvrir la vidéo du bateau"
             >
-                <img src="/assets/bateau.png" alt="" />
+                <img src="/assets/bateau_vf.png" alt="" />
             </button>
 
             {show && (

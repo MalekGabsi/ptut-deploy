@@ -1,12 +1,10 @@
 import { useEffect, useRef } from "react"
 import "./style.css"
 
-import Boussole from "./Boussole"
-import Longuevue from "./Longuevue"
 import Bateau from "./Bateau"
 import Capitaine from "./Capitaine"
 import PlusInfo from "./PlusInfo"
-import IcebergHotspot from "./IcebergHotspot"
+import Boussole from "./Boussole"
 
 export default function Home() {
   const sceneRef = useRef<HTMLElement | null>(null)
@@ -46,27 +44,29 @@ export default function Home() {
 
   return (
     <main ref={sceneRef} className="scene scene--fx" aria-label="Page d'accueil CAPITNF1">
-      {/* Fond */}
-      <img src="/assets/background.JPG" className="layer bg bg--fx" alt="" />
+      {/* Fond vide — base sans éléments */}
+      <img src="/assets/fond_vf.jpg" className="layer bg bg--fx" alt="" />
 
       {/* FX dynamiques */}
       <div className="fx fx--sky" aria-hidden="true" />
-      <div className="fx fx--clouds" aria-hidden="true" />
       <div className="fx fx--water" aria-hidden="true" />
       <div className="fx fx--sparkles" aria-hidden="true" />
 
-      {/* Overlays */}
-      <img src="/assets/title.PNG" className="layer overlay overlay--fx" alt="" />
-      <img src="/assets/iceberg_layer.PNG" className="layer overlay overlay--fx2" alt="" />
-      <div className="fx fx--icebergShadow" aria-hidden="true" />
+      {/* Titre en haut au centre */}
+      <img src="/assets/title.PNG" className="layer overlay overlay--title" alt="CAPITNF1" />
 
-      {/* Objets cliquables — chacun dans son propre composant */}
-      <Boussole />
-      <Longuevue />
+
+      {/* Éléments interactifs superposés */}
       <Bateau />
       <Capitaine />
       <PlusInfo />
-      <IcebergHotspot />
+      <Boussole />
+
+      {/* Baleine */}
+      <img src="/assets/bon_balaine.png" className="obj obj--balaine" alt="" />
+
+      {/* Zone cliquable iceberg du fond */}
+      <a href="/iceberg" className="hotspot hotspot--iceberg" aria-label="Explorer l'iceberg" />
     </main>
   )
 }

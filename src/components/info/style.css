@@ -188,6 +188,13 @@
   justify-items: center;
 }
 
+/* 3 colonnes forcées sur desktop */
+.pi-supporters__grid--3x2 {
+  grid-template-columns: repeat(3, 1fr);
+  max-width: 780px;
+  gap: 36px 24px;
+}
+
 .pi-supporter {
   display: flex;
   flex-direction: column;
@@ -202,8 +209,8 @@
 }
 
 .pi-supporter__logo {
-  width: 100px;
-  height: 100px;
+  width: 130px;
+  height: 130px;
   border-radius: 50%;
   background: #fff;
   display: grid;
@@ -213,16 +220,16 @@
 }
 
 .pi-supporter__logo img {
-  max-width: 70%;
-  max-height: 70%;
+  max-width: 75%;
+  max-height: 75%;
   object-fit: contain;
 }
 
 .pi-supporter__name {
   color: rgba(255, 255, 255, 0.85);
-  font-size: 13px;
+  font-size: 14px;
   text-align: center;
-  max-width: 140px;
+  max-width: 160px;
   font-family: 'Patrick Hand', cursive;
 }
 
@@ -360,10 +367,51 @@
   box-shadow: 0 8px 20px rgba(46, 95, 126, 0.15);
 }
 
-.pi-video-link::before {
-  content: '▶';
-  font-size: 18px;
+/* === Thumbnail video cards (links) === */
+.pi-video-thumb-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  height: 100%;
 }
+
+.pi-video-thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 0;
+}
+
+.pi-video-thumb--placeholder {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #2e5f7e, #4a8aad);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.pi-video-thumb__title {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 10px 12px;
+  background: rgba(0, 0, 0, 0.65);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.3;
+  backdrop-filter: blur(4px);
+}
+
+.pi-video-card:hover .pi-video-thumb {
+  opacity: 0.85;
+}
+
 
 /* =========================
    Quelques lectures
