@@ -11,12 +11,10 @@ export default function Home() {
   const navigate = useNavigate()
 
   const [showTransition, setShowTransition] = useState(false)
-  const [videoFinished, setVideoFinished] = useState(false)
 
   // Show transition video on captain click
   const handleCaptainClick = () => {
     setShowTransition(true)
-    setVideoFinished(false)
   }
 
   // Parallax mouse tracking
@@ -111,45 +109,14 @@ export default function Home() {
               src="/assets/transition.mp4"
               autoPlay
               playsInline
-              onEnded={() => setVideoFinished(true)}
+              onEnded={() => navigate("/questions")}
               onError={(e) => {
                 console.error("Video error:", e);
-                setVideoFinished(true); // Permet de continuer si la vidéo échoue
+                // Si la vidéo échoue à se lancer, on passe directement à la page suivante
+                navigate("/questions");
               }}
               style={{ width: '100%', height: '100%', objectFit: 'contain' }}
             />
-
-            {/* Bouton Continuer qui apparaît à la fin de la vidéo */}
-            {videoFinished && (
-              <div style={{
-                position: 'absolute',
-                inset: 0,
-                background: 'rgba(0,0,0,0.3)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center'
-              }}>
-                <button
-                  onClick={() => navigate("/questions")}
-                  style={{
-                    padding: '12px 32px',
-                    fontSize: '22px',
-                    fontFamily: '"Patrick Hand", cursive',
-                    backgroundColor: '#1E90FF',
-                    color: 'white',
-                    border: 'none',
-                    borderRadius: '30px',
-                    cursor: 'pointer',
-                    boxShadow: '0 4px 15px rgba(0,0,0,0.3)',
-                    transition: 'transform 0.2s'
-                  }}
-                  onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
-                  onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}
-                >
-                  Continuer vers les questions
-                </button>
-              </div>
-            )}
           </div>
         </div>
       )}
