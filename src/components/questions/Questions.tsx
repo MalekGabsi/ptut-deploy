@@ -1,5 +1,4 @@
 import { useState } from "react"
-import { useNavigate } from "react-router-dom"
 import "./style.css"
 
 /* ── Données des personnages (bulles) ── */
@@ -14,7 +13,6 @@ const heads = [
 ]
 
 export default function Questions() {
-    const navigate = useNavigate()
     const [showQuestionModal, setShowQuestionModal] = useState(false)
     const [questionText, setQuestionText] = useState("")
     const [submitted, setSubmitted] = useState(false)
@@ -52,9 +50,6 @@ export default function Questions() {
 
     return (
         <div className="quest-page">
-            <button className="quest-back" onClick={() => navigate("/")} aria-label="Retour à l'accueil">
-                ← Accueil
-            </button>
 
             <div className="quest-scene-wrapper">
                 {/* ── Fond : dégradé ciel + eau ── */}

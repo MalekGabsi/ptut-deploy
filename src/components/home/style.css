@@ -26,37 +26,63 @@ body {
 
 /* =========================
    Global Boussole Button (visible on all pages)
+   — juste la boussole, pas d'encart rond
 ========================= */
 .global-boussole {
   position: fixed;
-  top: 14px;
+  top: 12px;
   right: 14px;
   z-index: 9999;
-  width: 50px;
-  height: 50px;
+  width: 60px;
+  height: 60px;
   padding: 0;
   border: none;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(8px);
+  border-radius: 0;
+  background: transparent;
   cursor: pointer;
-  box-shadow: 0 4px 16px rgba(0, 60, 120, 0.25);
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: transform 0.2s;
 }
 
 .global-boussole:hover {
   transform: scale(1.15) rotate(15deg);
-  box-shadow: 0 6px 24px rgba(0, 100, 200, 0.35);
 }
 
 .global-boussole img {
-  width: 34px;
-  height: 34px;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
   pointer-events: none;
+  filter: drop-shadow(0 3px 8px rgba(0, 40, 80, 0.35));
+}
+
+/* =========================
+   Global Home Button (visible on all inner pages)
+========================= */
+.global-home-btn {
+  position: fixed;
+  top: 14px;
+  left: 14px;
+  z-index: 9999;
+  width: auto;
+  height: auto;
+  padding: 8px 18px;
+  border: none;
+  border-radius: 50px;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(8px);
+  cursor: pointer;
+  font-size: 22px;
+  line-height: 1;
+  box-shadow: 0 4px 14px rgba(0, 60, 120, 0.22);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.global-home-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 100, 200, 0.3);
 }
 
 /* =========================
@@ -369,12 +395,12 @@ body {
 }
 
 .scene:not(.debug) .obj--balaine {
-  animation: floatSoft 4s ease-in-out infinite;
+  animation: none;
 }
 
-/* Hover = stronger feedback (lift + glow) */
-.scene:not(.debug) .obj:hover,
-.scene:not(.debug) .obj:focus-visible {
+/* Hover = stronger feedback (lift + glow) — PAS pour la baleine */
+.scene:not(.debug) .obj:hover:not(.obj--balaine),
+.scene:not(.debug) .obj:focus-visible:not(.obj--balaine) {
   transform: translateY(-6px) scale(1.05) rotate(0.4deg);
   filter:
     drop-shadow(0 10px 22px rgba(0, 0, 0, 0.28)) drop-shadow(0 0 14px rgba(255, 255, 255, 0.78));
@@ -401,28 +427,28 @@ body {
   height: 34%;
 }
 
-/* Capitaine — aligne sur le capitaine du BG (gauche) */
+/* Capitaine — aligne sur le capitaine du BG (gauche) — abaissé et agrandi */
 .obj--capitaine {
-  left: 0%;
-  top: 40%;
-  width: 22%;
-  height: 58%;
+  left: -2%;
+  top: 58%;
+  width: 26%;
+  height: 52%;
 }
 
-/* Plus d'info : bas droit — encore plus grand */
+/* Plus d'info : bas droit — abaissé */
 .obj--plusinfo {
   right: -2%;
   left: auto;
-  bottom: 1%;
+  bottom: -6%;
   top: auto;
   width: 24%;
   height: 22%;
 }
 
-/* Boussole : haut gauche */
+/* Boussole : haut droite (sans encart) */
 .obj--boussole {
-  left: 1%;
-  right: auto;
+  right: 1%;
+  left: auto;
   top: 2%;
   bottom: auto;
   width: 8%;
@@ -430,15 +456,17 @@ body {
   z-index: 4;
 }
 
-/* Baleine : extrême gauche, dans l'eau */
+/* Baleine : gauche, plus grande, pas de vibration */
 .obj--balaine {
   left: 0%;
   right: auto;
-  top: 55%;
-  width: 8%;
-  height: 12%;
+  top: 48%;
+  width: 15%;
+  height: 18%;
   object-fit: contain;
   z-index: 2;
+  cursor: default;
+  pointer-events: none;
 }
 
 .obj--iceberg {
@@ -467,9 +495,7 @@ body {
 
 .hotspot:hover,
 .hotspot:focus-visible {
-  filter: drop-shadow(0 0 18px rgba(255, 255, 255, 0.6));
-  box-shadow: 0 0 30px 8px rgba(135, 206, 250, 0.35);
-  border-radius: 20px;
+  /* Pas de carré translucide — transparent au survol */
 }
 
 /* Zone cliquable sur l'iceberg du fond */
@@ -613,14 +639,14 @@ body {
 /* Overlays follow slightly */
 .overlay--title {
   will-change: transform;
-  /* title en haut au centre : objet-fit cover est trop grand, on le place custom */
+  /* title en haut au centre — plus grand */
   object-fit: contain;
   object-position: top center;
   top: 0;
   left: 0;
   right: 0;
   bottom: auto;
-  height: 28%;
+  height: 38%;
   transform: translate3d(calc(var(--mx) * -10px), calc(var(--my) * -6px), 0);
   z-index: 3;
 }
@@ -901,7 +927,7 @@ body {
    Modal overlay (video/photo)
 ========================================================= */
 .modal {
-  position: absolute;
+  position: fixed;
   inset: 0;
   z-index: 50;
   display: grid;
@@ -924,6 +950,62 @@ body {
   box-shadow: 0 20px 80px rgba(0, 0, 0, 0.55);
   background: rgba(10, 14, 20, 0.9);
   z-index: 1;
+}
+
+/* Animations d'entrée/sortie Bateau */
+@keyframes popFromBoat {
+  0% {
+    opacity: 0;
+    transform: scale(0) translate(50vw, 40vh);
+    border-radius: 50%;
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1) translate(0, 0);
+    border-radius: 18px;
+  }
+}
+
+@keyframes suckIntoBoat {
+  0% {
+    opacity: 1;
+    transform: scale(1) translate(0, 0);
+    border-radius: 18px;
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(0) translate(50vw, 40vh);
+    border-radius: 50%;
+  }
+}
+
+@keyframes fadeOutBackdrop {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+.modal__content--bateau {
+  animation: popFromBoat 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.25) forwards;
+}
+
+.modal--closing .modal__content--bateau {
+  animation: suckIntoBoat 0.4s cubic-bezier(0.6, -0.28, 0.735, 0.045) forwards;
+}
+
+.modal--closing .modal__backdrop {
+  animation: fadeOutBackdrop 0.4s ease forwards;
+}
+
+.modal--closing .bateaudelay {
+  opacity: 0;
+  pointer-events: none;
 }
 
 .modal__close {
@@ -949,10 +1031,11 @@ body {
    Transition Vidéo
 ========================================================= */
 .home-transition-overlay {
-  position: absolute;
+  position: fixed;
   inset: 0;
   z-index: 1000;
-  background: #000;
+  background: rgba(0, 30, 60, 0.7);
+  backdrop-filter: blur(6px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -960,9 +1043,14 @@ body {
 }
 
 .home-transition-video {
-  width: 100vw;
-  height: 100vh;
+  width: 90vw;
+  max-width: 1200px;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
   object-fit: cover;
+  flex-shrink: 0;
 }
 
 /* =========================================================

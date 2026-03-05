@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom"
 import "./style.css"
 
 export default function PlusInfos() {
@@ -6,9 +5,6 @@ export default function PlusInfos() {
     <div className="plusinfos">
       {/* ========================= HERO ========================= */}
       <header className="pi-hero">
-        <Link className="pi-hero__back" to="/" aria-label="Retour à la page interactive">
-          ← Retour à la page interactive
-        </Link>
         <img src="/assets/ice_b.png" className="pi-hero__banner" alt="CapitNF1 — Plus d'Info" />
       </header>
 
@@ -102,7 +98,7 @@ export default function PlusInfos() {
           <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', marginTop: '16px' }}>
             <div style={{ display: 'flex', alignItems: 'flex-start', gap: '16px' }}>
               <img
-                src="/assets/maxime.jpg"
+                src="/assets/maxime.jpeg"
                 alt="Maxime Moser"
                 style={{ width: '80px', height: '80px', borderRadius: '50%', objectFit: 'cover', border: '3px solid #fff', boxShadow: '0 4px 12px rgba(46,95,126,0.2)', flexShrink: 0 }}
               />
@@ -329,6 +325,14 @@ export default function PlusInfos() {
               allowFullScreen
             />
           </div>
+          <div className="pi-video-card">
+            <iframe
+              src="https://www.youtube.com/embed/MZxYHEyHYA8"
+              title="La différence expliquée aux enfants"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
+          </div>
         </div>
 
 
@@ -407,12 +411,34 @@ export default function PlusInfos() {
           </a>
 
           <a className="pi-book-card" href="https://www.gerneurofibromatosis.ch/brochure-dave-le-brave/" target="_blank" rel="noopener noreferrer">
-            <div className="pi-book-card__cover" aria-hidden="true" />
+            <img src="/assets/dave_le_brave.jpg" className="pi-book-card__cover" alt="Couverture Dave le Brave" />
             <div className="pi-book-card__info">
               <h3 className="pi-book-card__title">Dave le Brave</h3>
               <p className="pi-book-card__author">GER-NF</p>
               <p className="pi-book-card__desc">
                 Ce livre a été écrit pour les enfants sur la NF1. Il a pour but d'aider à mieux comprendre la NF1.
+              </p>
+            </div>
+          </a>
+
+          <a className="pi-book-card" href="https://arenes.fr/livre/je-suis-moi-et-personne-dautre/" target="_blank" rel="noopener noreferrer">
+            <img src="/assets/je_suis_moi.jpg" className="pi-book-card__cover" alt="Couverture Je suis moi et personne d'autre" />
+            <div className="pi-book-card__info">
+              <h3 className="pi-book-card__title">Je suis moi et personne d’autre</h3>
+              <p className="pi-book-card__author">Album jeunesse</p>
+              <p className="pi-book-card__desc">
+                Un album qui célèbre l’unicité de chaque enfant et l’importance de s’accepter tel que l’on est.
+              </p>
+            </div>
+          </a>
+
+          <a className="pi-book-card" href="https://www.youtube.com/watch?v=QcF4aV5JNKc" target="_blank" rel="noopener noreferrer">
+            <img src="/assets/elmer.jpg" className="pi-book-card__cover" alt="Couverture Elmer" />
+            <div className="pi-book-card__info">
+              <h3 className="pi-book-card__title">Elmer</h3>
+              <p className="pi-book-card__author">David McKee — École des Loisirs</p>
+              <p className="pi-book-card__desc">
+                L’histoire d’Elmer, l’éléphant multicolore, qui apprend que la différence est une force.
               </p>
             </div>
           </a>

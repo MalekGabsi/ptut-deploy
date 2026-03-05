@@ -1,109 +1,144 @@
 import { useState, useEffect, useCallback } from "react"
-import { useNavigate } from "react-router-dom"
 import "./style.css"
 
-interface Symptom {
+/* ── Types ─────────────────────────────────────── */
+interface BaseEl {
     id: string
     label: string
-    icon?: string
-    xPct: string
-    yPct: string
-    above: boolean
+    xPct: number   // left %
+    yPct: number   // top %
     video: string
     description: string
 }
 
-const symptoms: Symptom[] = [
-    // ── AU-DESSUS (Panneaux en bois) ───────────────────────────
+interface Sign extends BaseEl {
+    type: "sign"
+    signImg: string
+    picto?: string
+    rotate?: number
+}
+
+interface Bubble extends BaseEl {
+    type: "bubble"
+    icon?: string
+    size: "sm" | "md"
+}
+
+type IceItem = Sign | Bubble
+
+const STYLE_SNOW = "/assets/sign_v2.png"
+const STYLE_BARE = "/assets/Illustration_sans_titre.png"
+
+const PICTO_TACHES = "/assets/IMG_0405.PNG"
+const PICTO_CORPS = "/assets/corp.png"
+const PICTO_DIG = "/assets/dig.PNG"
+
+/* ──────────────────────────────────────────────────
+   DONNÉES — positions calées sur la capture de référence
+────────────────────────────────────────────────── */
+const items: IceItem[] = [
+
+    // ═══════ PANCARTES ═══════════════════════════════════════════════════
+
+    // 1. "taches" — bas gauche de l'iceberg central
     {
-        id: "taches-1", label: "taches", icon: "/assets/IMG_0405.PNG",
-        xPct: "30%", yPct: "50%", above: true,
-        video: "/assets/4 Second Timer.mp4", description: "Les taches café au lait sur la peau."
+        type: "sign", id: "taches-bas-g", label: "taches",
+        signImg: STYLE_SNOW, rotate: -7,
+        xPct: 30, yPct: 40,
+        video: "/assets/4 Second Timer.mp4",
+        description: "Les taches café au lait."
     },
+    // 2. "taches" — flanc supérieur gauche de l'iceberg central
     {
-        id: "taches-2", label: "taches", icon: "/assets/IMG_0405.PNG",
-        xPct: "37%", yPct: "30%", above: true,
-        video: "/assets/4 Second Timer.mp4", description: "Les taches."
+        type: "sign", id: "taches-haut-g", label: "taches",
+        signImg: STYLE_BARE, picto: PICTO_TACHES, rotate: -4,
+        xPct: 39, yPct: 24,
+        video: "/assets/4 Second Timer.mp4",
+        description: "Les taches café au lait."
     },
+    // 3. "taches" — centre de l'iceberg
     {
-        id: "taches-3", label: "taches", icon: "/assets/IMG_0405.PNG",
-        xPct: "45%", yPct: "43%", above: true,
-        video: "/assets/4 Second Timer.mp4", description: "Les taches."
+        type: "sign", id: "taches-centre", label: "taches",
+        signImg: STYLE_BARE, rotate: 3,
+        xPct: 47, yPct: 35,
+        video: "/assets/4 Second Timer.mp4",
+        description: "Les taches café au lait."
     },
+    // 4. "neurofibromes" — sommet de l'iceberg central
     {
-        id: "neurofibromes", label: "neurofibromes", icon: "/assets/IMG_0403.PNG",
-        xPct: "51%", yPct: "26%", above: true,
-        video: "/assets/4 Second Timer.mp4", description: "Tumeurs bénignes sur les nerfs."
+        type: "sign", id: "neurofibromes", label: "neurofibromes",
+        signImg: STYLE_BARE, picto: PICTO_CORPS, rotate: 1,
+        xPct: 53, yPct: 14,
+        video: "/assets/4 Second Timer.mp4",
+        description: "Les neurofibromes."
     },
+    // 5. "Scoliose" — flanc droit de l'iceberg central
     {
-        id: "scoliose-1", label: "Scoliose", icon: "/assets/IMG_0404.PNG",
-        xPct: "58%", yPct: "42%", above: true,
-        video: "/assets/4 Second Timer.mp4", description: "Déviation de la colonne vertébrale."
+        type: "sign", id: "scoliose-1", label: "Scoliose",
+        signImg: STYLE_BARE, picto: PICTO_DIG, rotate: 4,
+        xPct: 60, yPct: 30,
+        video: "/assets/4 Second Timer.mp4",
+        description: "La scoliose."
     },
+    // 6. "taches" — bas droit de l'iceberg central
     {
-        id: "taches-4", label: "taches", icon: "/assets/IMG_0405.PNG",
-        xPct: "65%", yPct: "52%", above: true,
-        video: "/assets/4 Second Timer.mp4", description: "Les taches."
+        type: "sign", id: "taches-droite", label: "taches",
+        signImg: STYLE_BARE, rotate: -2,
+        xPct: 66, yPct: 40,
+        video: "/assets/4 Second Timer.mp4",
+        description: "Les taches."
     },
-    // Panneaux sur le 2e iceberg (à droite)
+    // 7. "Scoliose" — petit iceberg de droite (gauche)
     {
-        id: "scoliose-2", label: "Scoliose", icon: "/assets/IMG_0404.PNG",
-        xPct: "81%", yPct: "52%", above: true,
-        video: "/assets/4 Second Timer.mp4", description: "Déviation de la colonne vertébrale."
+        type: "sign", id: "scoliose-2", label: "Scoliose",
+        signImg: STYLE_BARE, rotate: -5,
+        xPct: 82, yPct: 34,
+        video: "/assets/4 Second Timer.mp4",
+        description: "Scoliose."
     },
+    // 8. "Scoliose" — petit iceberg de droite (droite)
     {
-        id: "scoliose-3", label: "Scoliose", icon: "/assets/IMG_0404.PNG",
-        xPct: "89%", yPct: "52%", above: true,
-        video: "/assets/4 Second Timer.mp4", description: "Déviation de la colonne vertébrale."
+        type: "sign", id: "scoliose-3", label: "Scoliose",
+        signImg: STYLE_SNOW, rotate: 2,
+        xPct: 89, yPct: 35,
+        video: "/assets/4 Second Timer.mp4",
+        description: "Scoliose."
     },
 
-    // ── EN-DESSOUS (Bulles) ───────────────────────────────────
-    // Côté bateau
-    {
-        id: "troubles-1", label: "troubles",
-        xPct: "19%", yPct: "75%", above: false,
-        video: "/assets/4 Second Timer.mp4", description: "Troubles cognitifs."
-    },
-    // Iceberg principal
-    {
-        id: "ophtalmique", label: "Ophtalmique", icon: "/assets/IMG_0408.PNG",
-        xPct: "41%", yPct: "66%", above: false,
-        video: "/assets/4 Second Timer.mp4", description: "Manifestations ophtalmiques."
-    },
-    {
-        id: "genetique", label: "génétique", icon: "/assets/IMG_0407.PNG",
-        xPct: "49%", yPct: "73%", above: false,
-        video: "/assets/4 Second Timer.mp4", description: "L'origine génétique de la maladie."
-    },
-    {
-        id: "troubles-2", label: "troubles", icon: "/assets/IMG_0406.PNG",
-        xPct: "58%", yPct: "68%", above: false,
-        video: "/assets/4 Second Timer.mp4", description: "Troubles d'apprentissage."
-    },
-    // Petites bulles 'troubles'
-    { id: "troubles-3", label: "troubles", xPct: "34%", yPct: "80%", above: false, video: "/assets/4 Second Timer.mp4", description: "Troubles." },
-    { id: "troubles-4", label: "troubles", xPct: "42%", yPct: "85%", above: false, video: "/assets/4 Second Timer.mp4", description: "Troubles." },
-    { id: "troubles-5", label: "troubles", xPct: "53%", yPct: "88%", above: false, video: "/assets/4 Second Timer.mp4", description: "Troubles." },
-    { id: "troubles-6", label: "troubles", xPct: "61%", yPct: "80%", above: false, video: "/assets/4 Second Timer.mp4", description: "Troubles." },
-    { id: "troubles-7", label: "troubles", xPct: "48%", yPct: "95%", above: false, video: "/assets/4 Second Timer.mp4", description: "Troubles." },
-    // Côté iceberg droit
-    { id: "troubles-8", label: "troubles", xPct: "80%", yPct: "68%", above: false, video: "/assets/4 Second Timer.mp4", description: "Troubles." },
-    { id: "troubles-9", label: "troubles", xPct: "88%", yPct: "71%", above: false, video: "/assets/4 Second Timer.mp4", description: "Troubles." },
-    { id: "troubles-10", label: "troubles", xPct: "94%", yPct: "68%", above: false, video: "/assets/4 Second Timer.mp4", description: "Troubles." },
+    // ═══════ BULLES (sous l'eau) ═════════════════════════════════════════
+
+    // Groupe extrême gauche
+    { type: "bubble", id: "b1", label: "troubles", size: "sm", xPct: 18, yPct: 65, video: "", description: "" },
+    { type: "bubble", id: "b2", label: "troubles", size: "sm", xPct: 20, yPct: 76, video: "", description: "" },
+    { type: "bubble", id: "b14", label: "troubles", size: "sm", xPct: 18, yPct: 86, video: "", description: "" },
+
+    // Iceberg central — ligne haute
+    { type: "bubble", id: "b3", label: "Ophtalmique", icon: "/assets/Groupe 7.png", size: "md", xPct: 41, yPct: 61, video: "", description: "" },
+    { type: "bubble", id: "b4", label: "troubles", icon: "/assets/Groupe 6.png", size: "md", xPct: 58, yPct: 64, video: "", description: "" },
+    // Centre
+    { type: "bubble", id: "b5", label: "genetique", icon: "/assets/Groupe 5.png", size: "md", xPct: 48, yPct: 69, video: "", description: "" },
+    // Ligne basse gauche
+    { type: "bubble", id: "b6", label: "troubles", size: "sm", xPct: 34, yPct: 75, video: "", description: "" },
+    { type: "bubble", id: "b7", label: "troubles", size: "sm", xPct: 42, yPct: 82, video: "", description: "" },
+    // Ligne basse droite
+    { type: "bubble", id: "b8", label: "troubles", size: "sm", xPct: 60, yPct: 78, video: "", description: "" },
+    { type: "bubble", id: "b9", label: "troubles", size: "sm", xPct: 48, yPct: 90, video: "", description: "" },
+
+    // Petit iceberg de droite
+    { type: "bubble", id: "b10", label: "troubles", size: "sm", xPct: 80, yPct: 61, video: "", description: "" },
+    { type: "bubble", id: "b11", label: "troubles", size: "sm", xPct: 87, yPct: 66, video: "", description: "" },
+    { type: "bubble", id: "b12", label: "troubles", size: "sm", xPct: 93, yPct: 60, video: "", description: "" },
 ]
 
+/* ── Composant ─────────────────────────────────── */
 export default function Iceberg() {
-    const navigate = useNavigate()
-    const [active, setActive] = useState<Symptom | null>(null)
+    const [active, setActive] = useState<IceItem | null>(null)
     const [isClosing, setIsClosing] = useState(false)
     const closeModal = useCallback(() => setActive(null), [])
 
     const handleVideoEnd = () => {
         setIsClosing(true)
-        setTimeout(() => {
-            setActive(null)
-            setIsClosing(false)
-        }, 800)
+        setTimeout(() => { setActive(null); setIsClosing(false) }, 800)
     }
 
     useEffect(() => {
@@ -112,78 +147,78 @@ export default function Iceberg() {
         return () => window.removeEventListener("keydown", onKey)
     }, [closeModal])
 
-    const above = symptoms.filter(s => s.above)
-    const below = symptoms.filter(s => !s.above)
-
     return (
         <div className="ice-page">
-            <button className="ice-back" onClick={() => navigate("/")} aria-label="Retour à l'accueil">
-                ← Accueil
-            </button>
-
             <div className="ice-scene-wrapper">
-                {/* ── Fond complet (tient 100% de la largeur) ── */}
-                <img src="/assets/fond_vf.jpg" className="ice-bg-full" alt="Fond" draggable={false} />
+                <img src="/assets/page_off_iceberg.png" className="ice-bg-full" alt="Iceberg" draggable={false} />
 
-                {/* ── Iceberg principal complet (ice_page_icebe.png) ── */}
-                <img src="/assets/ice_page_icebe.png" className="ice-main" alt="Iceberg Principal" draggable={false} />
+                {items.map(item => {
+                    if (item.type === "sign") {
+                        return (
+                            <button
+                                key={item.id}
+                                className="ice-sign"
+                                style={{
+                                    left: `${item.xPct}%`,
+                                    top: `${item.yPct}%`,
+                                    transform: `translate(-50%, -100%)`,
+                                }}
+                                onClick={() => setActive(item)}
+                                aria-label={item.label}
+                            >
+                                <span className="ice-sign__label">{item.label}</span>
 
-                {/* ── Bateau coupée à gauche ── */}
-                <img src="/assets/bateau_iceburge.png" className="ice-boat" alt="Bateau" draggable={false} />
+                                <div className="ice-sign__face">
+                                    <div
+                                        className="ice-sign__face"
+                                        style={{ transform: `rotate(${item.rotate ?? 0}deg)` }}
+                                    >
+                                        <img src={item.signImg} className="ice-sign__base" alt="" draggable={false} />
+                                    </div>
 
-                {/* ── 2e Iceberg à droite ── */}
-                <img src="/assets/element_iceburg2.png" className="ice-iceberg2" alt="Iceberg 2" draggable={false} />
-
-                {/* ── Baleine ── */}
-                <img src="/assets/bon_balaine.png" className="ice-whale" alt="Baleine" draggable={false} />
-
-                {/* ── Superposition eau (mer transparente IMG_0394) ── */}
-                {/* On la met ici pour qu'elle passe DEVANT le bas de l'iceberg principal */}
-                <img src="/assets/IMG_0394.PNG" className="ice-water-layer" alt="Eau" draggable={false} />
-
-                {/* ── Eau profonde (remplit tout le bas) ── */}
-                <div className="ice-deep-water"></div>
-
-                {/* ── Pictos Au-dessus ── */}
-                {above.map(s => (
-                    <button
-                        key={s.id}
-                        className="ice-picto ice-picto--above"
-                        style={{ left: s.xPct, top: s.yPct }}
-                        onClick={() => setActive(s)}
-                    >
-                        <div className="ice-sign">
-                            <img src="/assets/Illustration_sans_titre.png" className="ice-sign__board" alt="" draggable={false} />
-                            {s.icon && <img src={s.icon} className="ice-sign__icon" alt="" draggable={false} />}
-                        </div>
-                        <span className="ice-picto__label">{s.label}</span>
-                    </button>
-                ))}
-
-                {/* ── Pictos En-dessous (bulles CSS) ── */}
-                {below.map(s => (
-                    <button
-                        key={s.id}
-                        className="ice-picto ice-picto--below"
-                        style={{ left: s.xPct, top: s.yPct }}
-                        onClick={() => setActive(s)}
-                    >
-                        <div className={`ice-bubble ${s.icon ? 'ice-bubble--main' : 'ice-bubble--small'}`}>
-                            {s.icon && <img src={s.icon} className="ice-bubble__icon" alt="" draggable={false} />}
-                        </div>
-                        <span className="ice-picto__label ice-picto__label--below">{s.label}</span>
-                    </button>
-                ))}
+                                    {item.picto && (
+                                        <img
+                                            src={item.picto}
+                                            className={`ice-sign__groundPicto ${item.picto.includes('IMG_0405') ? 'picto-taches' :
+                                                item.picto.includes('corp') ? 'picto-corps' :
+                                                    item.picto.includes('dig') ? 'picto-dig' : ''
+                                                }`}
+                                            alt=""
+                                            draggable={false}
+                                        />
+                                    )}
+                                </div>
+                            </button>
+                        )
+                    } else {
+                        return (
+                            <button
+                                key={item.id}
+                                className={`ice-bubble ice-bubble--${item.size}`}
+                                style={{
+                                    left: `${item.xPct}%`,
+                                    top: `${item.yPct}%`,
+                                }}
+                                onClick={() => setActive(item)}
+                                aria-label={item.label}
+                            >
+                                {item.icon && <img src={item.icon} className="ice-bubble__icon" alt="" draggable={false} />}
+                                <span className="ice-bubble__label">{item.label}</span>
+                            </button>
+                        )
+                    }
+                })}
             </div>
 
-            {/* ── Modale vidéo ── */}
             {active && (
                 <div className={`ice-modal ${isClosing ? 'ice-modal--closing' : ''}`} role="dialog" aria-modal="true">
                     <div className="ice-modal__backdrop" onClick={closeModal} />
                     <div className="ice-modal__box">
                         <button className="ice-modal__close" onClick={closeModal} aria-label="Fermer">✕</button>
                         <div className="ice-modal__header">
-                            {active.icon && <img src={active.icon} className="ice-modal__hero" alt="" draggable={false} />}
+                            {((active as any).icon || (active as any).picto) && (
+                                <img src={((active as any).icon || (active as any).picto)} className="ice-modal__hero" alt="" draggable={false} />
+                            )}
                             <h2 className="ice-modal__title">{active.label}</h2>
                         </div>
                         <p className="ice-modal__desc">{active.description}</p>

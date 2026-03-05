@@ -9,8 +9,8 @@ function GlobalBoussole() {
   const location = useLocation()
   const navigate = useNavigate()
 
-  // Ne pas afficher sur l'accueil (elle y est déjà) ni sur la page boussole
-  if (location.pathname === '/' || location.pathname === '/boussole') return null
+  // Ne pas afficher sur la page d'accueil (elle y est déjà)
+  if (location.pathname === '/') return null
 
   return (
     <button
@@ -19,7 +19,25 @@ function GlobalBoussole() {
       title="Guide du site"
       aria-label="Ouvrir le guide"
     >
-      <img src="/assets/boussole.png" alt="Boussole" draggable={false} />
+      <img src="/assets/boussole new.png" alt="Boussole" draggable={false} />
+    </button>
+  )
+}
+
+function GlobalHomeButton() {
+  const location = useLocation()
+  const navigate = useNavigate()
+
+  if (location.pathname === '/') return null
+
+  return (
+    <button
+      className="global-home-btn"
+      onClick={() => navigate('/')}
+      title="Retour"
+      aria-label="Retour à la page d'accueil"
+    >
+      🏠
     </button>
   )
 }
@@ -40,6 +58,7 @@ function App() {
   return (
     <>
       <RotateOverlay />
+      <GlobalHomeButton />
       <GlobalBoussole />
       <Routes>
         <Route path="/" element={<Home />} />
