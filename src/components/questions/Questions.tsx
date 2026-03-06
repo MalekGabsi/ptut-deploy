@@ -50,16 +50,19 @@ export default function Questions() {
 
     return (
         <div className="quest-page">
+            {/* ── Fond flouté pour le remplissage ── */}
+            <div className="quest-bg-blur" style={{ backgroundImage: 'url("/assets/question_vv.jpg")' }}></div>
 
             <div className="quest-scene-wrapper">
-                {/* ── Fond : dégradé ciel + eau ── */}
-                <div className="quest-sky"></div>
-                <img src="/assets/IMG_0394.PNG" className="quest-water-layer" alt="Eau" draggable={false} />
+                {/* ── Image de fond principale ── */}
+                <img src="/assets/question_vv.jpg" className="quest-main-bg" alt="" draggable={false} />
 
                 {/* ── Capitaine assis sur son petit iceberg (centre) ── */}
-                <div className="quest-centerpiece">
+                {/* Note : Le capitaine est déjà intégré dans l'image question_vv.jpg, 
+                    on garde l'élément au cas où mais on peut le masquer s'il fait doublon */}
+                {/* <div className="quest-centerpiece">
                     <img src="/assets/captonice.png" className="quest-capitaine" alt="Capitaine" draggable={false} />
-                </div>
+                </div> */}
 
                 {/* ── 7 bulles de personnages en arc de cercle ── */}
                 {heads.map((h, i) => (
@@ -79,41 +82,42 @@ export default function Questions() {
                     <div className="quest-bubble quest-bubble--big">
                         <span className="quest-question-mark">?</span>
                     </div>
-                    <span className="quest-question-text">Une Question ?</span>
                 </button>
             </div>
 
             {/* ── Modal pour poser une question ── */}
-            {showQuestionModal && (
-                <div className="quest-modal-overlay" onClick={() => setShowQuestionModal(false)}>
-                    <div className="quest-modal" onClick={e => e.stopPropagation()}>
-                        <button className="quest-modal-close" onClick={() => setShowQuestionModal(false)}>✕</button>
-                        <h2 className="quest-modal-title">Pose ta question !</h2>
-                        {!submitted ? (
-                            <>
-                                <textarea
-                                    className="quest-modal-input"
-                                    placeholder="Écris ta question ici..."
-                                    value={questionText}
-                                    onChange={e => setQuestionText(e.target.value)}
-                                    rows={4}
-                                />
-                                <button
-                                    className="quest-modal-submit"
-                                    onClick={handleQuestionSubmit}
-                                    disabled={!questionText.trim()}
-                                >
-                                    Envoyer
-                                </button>
-                            </>
-                        ) : (
-                            <div className="quest-modal-success">
-                                ✅ Merci ! Ta question a bien été envoyée.
-                            </div>
-                        )}
+            {
+                showQuestionModal && (
+                    <div className="quest-modal-overlay" onClick={() => setShowQuestionModal(false)}>
+                        <div className="quest-modal" onClick={e => e.stopPropagation()}>
+                            <button className="quest-modal-close" onClick={() => setShowQuestionModal(false)}>✕</button>
+                            <h2 className="quest-modal-title">Pose ta question !</h2>
+                            {!submitted ? (
+                                <>
+                                    <textarea
+                                        className="quest-modal-input"
+                                        placeholder="Écris ta question ici..."
+                                        value={questionText}
+                                        onChange={e => setQuestionText(e.target.value)}
+                                        rows={4}
+                                    />
+                                    <button
+                                        className="quest-modal-submit"
+                                        onClick={handleQuestionSubmit}
+                                        disabled={!questionText.trim()}
+                                    >
+                                        Envoyer
+                                    </button>
+                                </>
+                            ) : (
+                                <div className="quest-modal-success">
+                                    ✅ Merci ! Ta question a bien été envoyée.
+                                </div>
+                            )}
+                        </div>
                     </div>
-                </div>
-            )}
-        </div>
+                )
+            }
+        </div >
     )
 }

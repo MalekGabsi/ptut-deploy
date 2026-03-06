@@ -9,6 +9,10 @@ export default function BoussoleGuide() {
                 <div className="bg-hero__overlay">
                     {/* Le titre est déjà intégré dans l'image de fond (fond_bousolle.jpg) */}
                 </div>
+                <div className="scroll-indicator" aria-hidden="true">
+                    <span>▼</span>
+                    <span>▼</span>
+                </div>
             </header>
             <p className="bg-hero__hint">🌊 Découvre comment naviguer sur le site ! 🧭</p>
 
@@ -23,21 +27,6 @@ export default function BoussoleGuide() {
                     <p>Chaque dessin que tu vois est une porte vers quelque chose d'important.</p>
                     <p>Clique dessus et tu découvriras des vidéos, des explications, des livres et même des endroits pour poser tes questions.</p>
                     <p>Je suis là pour te guider pendant toute ton aventure ❤️</p>
-                </div>
-
-                <div className="bg-card bg-menu-card">
-                    <h3>📋 Ce que tu peux découvrir à la fin :</h3>
-                    <ul className="bg-menu-list">
-                        <li>Est-ce que j'ai le droit de choisir ✅</li>
-                        <li>Est-ce que j'ai le droit de savoir 🤔</li>
-                        <li>Qui sont les médecins qui me soignent 👨‍⚕️</li>
-                        <li>Où vont mes données de santé 🔐</li>
-                        <li>Livre ou vidéo 📚🎥</li>
-                        <li>Contacter un adulte 👩‍👧</li>
-                        <li>Poser des questions ❓</li>
-                        <li>D'autres supports 📂</li>
-                        <li>Différence 🌈</li>
-                    </ul>
                 </div>
             </section>
 
@@ -88,6 +77,24 @@ export default function BoussoleGuide() {
                     <p>Ici, tu trouveras des informations sur toutes les personnes qui travaillent pour faire vivre CapitNF1.</p>
                     <p>Il y a aussi d'autres vidéos et plein de liens vers des livres et d'autres ressources pour en apprendre davantage sur la NF1.</p>
                     <p>Tu peux les regarder seul(e) ou avec un adulte.</p>
+                </div>
+            </section>
+
+            {/* ========================= MENU DE FIN ========================= */}
+            <section className="bg-section bg-section--alt">
+                <div className="bg-card bg-menu-card">
+                    <h3>📋 Ce que tu peux découvrir :</h3>
+                    <ul className="bg-menu-list">
+                        <li>Est-ce que j'ai le droit de choisir ✅</li>
+                        <li>Est-ce que j'ai le droit de savoir 🤔</li>
+                        <li>Qui sont les médecins qui me soignent 👨‍⚕️</li>
+                        <li>Où vont mes données de santé 🔐</li>
+                        <li>Livre ou vidéo 📚🎥</li>
+                        <li>Contacter un adulte 👩‍👧</li>
+                        <li>Poser des questions ❓</li>
+                        <li>D'autres supports 📂</li>
+                        <li>Différence 🌈</li>
+                    </ul>
                 </div>
             </section>
 

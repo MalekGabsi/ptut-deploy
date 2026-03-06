@@ -77,7 +77,7 @@ export default function Home() {
           <div style={{
             position: 'relative',
             width: '100%',
-            maxWidth: '800px',
+            maxWidth: '1050px', // Agrandi de 800px à 1200px
             backgroundColor: '#000',
             borderRadius: '16px',
             overflow: 'hidden',

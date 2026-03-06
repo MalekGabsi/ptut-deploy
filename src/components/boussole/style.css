@@ -37,7 +37,7 @@
     justify-content: flex-end;
     /* Garder l'eau en bas */
     width: 100vw;
-    height: 56.25vw;
+    height: 30vw;
     /* Ratio 16:9 parfait */
     min-height: 420px;
     overflow: hidden;
@@ -103,6 +103,53 @@
     width: 60%;
     object-fit: contain;
     filter: drop-shadow(0 4px 16px rgba(0, 0, 0, 0.2));
+}
+
+/* =========================
+   Scroll Indicator
+========================= */
+.scroll-indicator {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: -10px;
+    z-index: 5;
+    opacity: 0.8;
+}
+
+.scroll-indicator span {
+    color: white;
+    font-size: 24px;
+    line-height: 0.8;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+    animation: scrollBounce 2s infinite;
+}
+
+.scroll-indicator span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+@keyframes scrollBounce {
+
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+        transform: translateY(0);
+    }
+
+    40% {
+        transform: translateY(-10px);
+    }
+
+    60% {
+        transform: translateY(-5px);
+    }
 }
 
 .bg-hero__hint {

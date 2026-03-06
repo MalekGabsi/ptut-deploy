@@ -338,9 +338,9 @@
 
 .pi-videos__grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
-  max-width: 900px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  max-width: 1000px;
   margin: 0 auto;
 }
 
@@ -504,13 +504,7 @@
 /* =========================
    Missing Styles
 ========================= */
-.pi-videos__grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
-  max-width: 960px;
-  margin: 0 auto;
-}
+/* Repris par la règle au-dessus */
 
 .pi-video-card {
   position: relative;

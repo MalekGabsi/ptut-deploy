@@ -3,14 +3,24 @@
    ═══════════════════════════════════════════════ */
 
 .quest-page {
+    position: relative;
     width: 100vw;
     height: 100vh;
     overflow: hidden;
-    /* Coupe tout ce qui dépasse (crop) */
     display: flex;
     align-items: center;
     justify-content: center;
     background: #000;
+}
+
+/* ── Fond flouté ── */
+.quest-bg-blur {
+    position: absolute;
+    inset: -20px;
+    background-size: cover;
+    background-position: center;
+    filter: blur(15px) brightness(0.9);
+    z-index: 0;
 }
 
 /* ── Bouton retour ── */
@@ -48,55 +58,30 @@
    ══════════════════════════════════════════════════════ */
 .quest-scene-wrapper {
     position: relative;
-    /* Ratio 16:9 forcé */
     width: 100vw;
     height: 56.25vw;
-    /* Si l'écran est très haut (téléphone, tablette), on force la hauteur et la largeur suit */
-    min-height: 100vh;
-    min-width: 177.77vh;
-    flex-shrink: 0;
+    /* 16:9 */
+    max-height: 100vh;
+    max-width: 177.77vh;
+    z-index: 1;
+    overflow: hidden;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
 }
 
-/* ── Ciel ── */
-.quest-sky {
+.quest-main-bg {
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, #d3f0fa 0%, #b5e4f5 100%);
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
     z-index: 0;
 }
 
-/* ── Eau (Image Wave png) ── */
-.quest-water-layer {
-    position: absolute;
-    bottom: -15%;
-    /* Fait descendre l'eau plus bas (déborde en bas) */
-    left: 0;
-    width: 100%;
-    height: 70%;
-    /* On l'agrandit pour combler la descente sans couper en haut */
-    object-fit: fill;
-    /* Remplit parfaitement le bas de la zone 16:9 sans déborder */
-    z-index: 10;
-}
 
-/* ── Capitaine sur Iceberg ── */
+
+/* Masqué car intégré dans le fond */
 .quest-centerpiece {
-    position: absolute;
-    left: 49.5%;
-    /* Centrage horizontal */
-    top: 70%;
-    /* Descendu de 55% à 70% pour asseoir le capitaine sur l'eau descendue */
-    transform: translate(-50%, -50%);
-    width: 32%;
-    /* Taille relative au conteneur 16:9 */
-    z-index: 20;
-    pointer-events: none;
-}
-
-.quest-capitaine {
-    width: 100%;
-    height: auto;
-    display: block;
+    display: none;
 }
 
 
@@ -122,46 +107,46 @@
     transform: translate(-50%, -50%) scale(1.12) translateY(-6px);
 }
 
-/* ── Positions alignées sur les visages de l'image de fond (étirée) ── */
+/* Positions recalées sur question_vv.jpg */
 .pos-1 {
-    left: 19%;
-    top: 59%;
+    left: 23.5%;
+    top: 62.5%;
 }
 
 .pos-2 {
-    left: 26%;
-    top: 42%;
+    left: 26.5%;
+    top: 39.5%;
 }
 
 .pos-3 {
-    left: 37%;
-    top: 28%;
+    left: 35.5%;
+    top: 20.5%;
 }
 
 .pos-4 {
-    left: 50%;
-    top: 21%;
+    left: 50.5%;
+    top: 14%;
 }
 
 .pos-5 {
-    left: 63%;
-    top: 27%;
+    left: 64.5%;
+    top: 21.5%;
 }
 
 .pos-6 {
-    left: 74%;
-    top: 41%;
+    left: 72.5%;
+    top: 39.5%;
 }
 
 .pos-7 {
-    left: 81%;
-    top: 58%;
+    left: 75.5%;
+    top: 62.5%;
 }
 
 .pos-question {
     position: absolute;
-    right: 8%;
-    top: 25%;
+    left: 91%;
+    top: 15%;
     z-index: 50;
 }
 
@@ -189,19 +174,17 @@
 /* ── Zone cliquable (invisible, ajuste sur les bulles dessinées) ── */
 .quest-bubble {
     position: relative;
-    width: 11vw;
-    /* Calibré sur la taille dessinée dans page_bul_vide.jpg */
-    height: 11vw;
+    width: 9.5vw;
+    height: 9.5vw;
+    max-width: 140px;
+    max-height: 140px;
     border-radius: 50%;
-    /* Fond transparent car les bulles sont dans l'image de fond */
     background: transparent;
     border: none;
     display: flex;
-    /* Pour centrer le visage à l'intérieur */
     align-items: center;
     justify-content: center;
     overflow: visible;
-    /* Animation de flottement organique */
     animation: questFloat 4s ease-in-out infinite alternate;
 }
 
@@ -251,15 +234,10 @@
     min-height: 55px;
     max-width: 120px;
     max-height: 120px;
-    background: radial-gradient(circle at 35% 30%,
-            rgba(255, 255, 255, 0.6) 0%,
-            rgba(180, 220, 250, 0.45) 50%,
-            rgba(80, 160, 220, 0.6) 100%);
-    border: 3px solid rgba(255, 255, 255, 0.5);
-    box-shadow:
-        inset 0 0 20px rgba(255, 255, 255, 0.85),
-        0 12px 30px rgba(0, 50, 100, 0.2);
-    backdrop-filter: blur(2px);
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    backdrop-filter: none;
     animation: questFloat 4s ease-in-out infinite alternate;
 }
 
