@@ -69,7 +69,9 @@ export default function Bateau() {
 
             {show && (
                 <div className={`modal ${isClosing ? 'modal--closing' : ''}`} role="dialog" aria-modal="true" aria-label="Vidéo Bateau">
-                    <button className="global-home-btn bateaudelay" onClick={() => handleNav('/')} style={{ zIndex: 10001, position: 'absolute' }}>🏠</button>
+                    <button className="global-home-btn bateaudelay" onClick={() => handleNav('/')} style={{ zIndex: 10001, position: 'absolute' }}>
+                        <img src="/assets/1.jpg" alt="Accueil" draggable={false} />
+                    </button>
                     <button className="global-boussole bateaudelay" onClick={() => handleNav('/boussole')} style={{ zIndex: 10001, position: 'absolute' }}>
                         <img src="/assets/boussole new.png" alt="Boussole" draggable={false} />
                     </button>

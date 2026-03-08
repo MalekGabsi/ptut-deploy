@@ -37,7 +37,7 @@ function GlobalHomeButton() {
       title="Retour"
       aria-label="Retour à l'accueil"
     >
-      🏠
+      <img src="/assets/1.jpg" alt="Accueil" draggable={false} />
     </button>
   )
 }

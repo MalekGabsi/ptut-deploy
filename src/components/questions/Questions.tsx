@@ -17,6 +17,10 @@ export default function Questions() {
     const [questionText, setQuestionText] = useState("")
     const [submitted, setSubmitted] = useState(false)
 
+    // États pour le lecteur audio
+    const [isPlaying, setIsPlaying] = useState(false)
+    const [isPaused, setIsPaused] = useState(false)
+
     // Référence pour l'audio afin d'éviter les superpositions
     const audioRef = useRef<HTMLAudioElement | null>(null)
 
@@ -27,6 +31,7 @@ export default function Questions() {
                 audioRef.current.pause()
                 audioRef.current.currentTime = 0
                 audioRef.current = null
+                setIsPlaying(false)
             }
         }
     }, [])
@@ -38,11 +43,52 @@ export default function Questions() {
             return
         }
 
-        // Sinon, on lance (ou relance) l'audio
-        if (!audioRef.current) {
-            audioRef.current = new Audio("/assets/QR1-Taches_v2.mp3")
+        // Si l'audio est en pause, on le relance
+        if (audioRef.current && audioRef.current.paused && audioRef.current.currentTime > 0) {
+            audioRef.current.play()
+            setIsPlaying(true)
+            setIsPaused(false)
+            return
         }
+
+        // Sinon, on lance (ou relance de zéro) l'audio
+        if (!audioRef.current) {
+            const audio = new Audio("/assets/QR1-Taches_v2.mp3")
+
+            // Événements pour synchroniser l'UI
+            audio.onplay = () => {
+                setIsPlaying(true)
+                setIsPaused(false)
+            }
+            audio.onpause = () => setIsPaused(true)
+            audio.onended = () => {
+                setIsPlaying(false)
+                setIsPaused(false)
+            }
+
+            audioRef.current = audio
+        } else {
+            audioRef.current.currentTime = 0
+        }
+
         audioRef.current.play().catch(err => console.error("Erreur lecture audio:", err))
+    }
+
+    const togglePlayPause = () => {
+        if (!audioRef.current) return
+        if (audioRef.current.paused) {
+            audioRef.current.play()
+        } else {
+            audioRef.current.pause()
+        }
+    }
+
+    const stopAudio = () => {
+        if (!audioRef.current) return
+        audioRef.current.pause()
+        audioRef.current.currentTime = 0
+        setIsPlaying(false)
+        setIsPaused(false)
     }
 
     const handleQuestionSubmit = async () => {
@@ -100,7 +146,6 @@ export default function Questions() {
                     </button>
                 ))}
 
-                {/* ── Bulle Géante "Une Question ?" ── */}
                 <button className="quest-bubble-btn pos-question" onClick={() => setShowQuestionModal(true)}>
                     <div className="quest-bubble quest-bubble--big">
                         <span className="quest-question-mark">?</span>
@@ -108,6 +153,29 @@ export default function Questions() {
                     <div className="quest-bubble-label">Une Question</div>
                 </button>
             </div>
+
+            {/* ── Lecteur Audio Mini ── */}
+            {isPlaying && (
+                <div className="quest-audio-wrapper">
+                    <div className={`quest-audio-player ${isPaused ? 'is-paused' : ''}`}>
+                        <div className="quest-audio-waves">
+                            <div className="quest-wave-bar"></div>
+                            <div className="quest-wave-bar"></div>
+                            <div className="quest-wave-bar"></div>
+                            <div className="quest-wave-bar"></div>
+                            <div className="quest-wave-bar"></div>
+                        </div>
+
+                        <button className="quest-audio-btn" onClick={togglePlayPause} title={isPaused ? "Reprendre" : "Pause"}>
+                            {isPaused ? "▶️" : "⏸️"}
+                        </button>
+
+                        <button className="quest-audio-btn quest-audio-btn--stop" onClick={stopAudio} title="Arrêter">
+                            ⏹️
+                        </button>
+                    </div>
+                </div>
+            )}
 
             {/* ── Modal pour poser une question ── */}
             {

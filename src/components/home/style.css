@@ -75,10 +75,18 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 32px;
-  line-height: 1;
+  overflow: hidden;
+  /* Pour que l'image reste dans le cercle */
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
   transition: all 0.3s ease;
+}
+
+.global-home-btn img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  /* Pour voir TOUTE la photo */
+  border-radius: 50%;
 }
 
 .global-home-btn:hover {

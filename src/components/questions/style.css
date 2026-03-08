@@ -550,3 +550,143 @@
         top: 6%;
     }
 }
+
+/* ══════════════════════════════════════════════════════
+   AUDIO PLAYER CONTROLS
+   ══════════════════════════════════════════════════════ */
+.quest-audio-wrapper {
+    position: fixed;
+    bottom: 4vh;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    animation: playerSlideUp 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.quest-audio-player {
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 40px;
+    padding: 10px 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    box-shadow:
+        0 8px 32px rgba(0, 40, 80, 0.25),
+        inset 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+.quest-audio-btn {
+    background: white;
+    border: none;
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    font-size: 20px;
+    transition: transform 0.2s, background 0.2s;
+    color: #1a5f8a;
+}
+
+.quest-audio-btn:hover {
+    transform: scale(1.1);
+    background: #f0f9ff;
+}
+
+.quest-audio-btn--stop {
+    background: #ff5c5c;
+    color: white;
+}
+
+.quest-audio-btn--stop:hover {
+    background: #ff4040;
+}
+
+/* ── Sound Wave Animation ── */
+.quest-audio-waves {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    height: 20px;
+    padding: 0 10px;
+}
+
+.quest-wave-bar {
+    width: 3px;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 3px;
+    animation: wavePulse 1s ease-in-out infinite;
+}
+
+.quest-wave-bar:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.quest-wave-bar:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+.quest-wave-bar:nth-child(4) {
+    animation-delay: 0.1s;
+}
+
+.quest-wave-bar:nth-child(5) {
+    animation-delay: 0.3s;
+}
+
+.quest-audio-player.is-paused .quest-wave-bar {
+    animation-play-state: paused;
+    height: 30% !important;
+}
+
+@keyframes wavePulse {
+
+    0%,
+    100% {
+        height: 30%;
+    }
+
+    50% {
+        height: 100%;
+    }
+}
+
+@keyframes playerSlideUp {
+    from {
+        opacity: 0;
+        transform: translate(-50%, 40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate(-50%, 0);
+    }
+}
+
+/* Mobile adjustments */
+@media (max-width: 640px) {
+    .quest-audio-wrapper {
+        bottom: 2vh;
+    }
+
+    .quest-audio-player {
+        padding: 8px 16px;
+        gap: 12px;
+    }
+
+    .quest-audio-btn {
+        width: 38px;
+        height: 38px;
+        font-size: 16px;
+    }
+}
