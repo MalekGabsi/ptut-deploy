@@ -744,13 +744,13 @@ body {
 @keyframes popFromBoat {
   0% {
     opacity: 0;
-    transform: scale(0) translate(50vw, 40vh);
+    transform: translate(25vw, -12vh) scale(0);
     border-radius: 50%;
   }
 
   100% {
     opacity: 1;
-    transform: scale(1) translate(0, 0);
+    transform: translate(0, 0) scale(1);
     border-radius: 18px;
   }
 }
@@ -758,13 +758,13 @@ body {
 @keyframes suckIntoBoat {
   0% {
     opacity: 1;
-    transform: scale(1) translate(0, 0);
+    transform: translate(0, 0) scale(1);
     border-radius: 18px;
   }
 
   100% {
     opacity: 0;
-    transform: scale(0) translate(50vw, 40vh);
+    transform: translate(25vw, -12vh) scale(0);
     border-radius: 50%;
   }
 }

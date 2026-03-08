@@ -18,8 +18,9 @@ export default function Questions() {
     const [submitted, setSubmitted] = useState(false)
 
     /* Plus tard : chaque bulle jouera un audio */
-    const handleBubbleClick = (id: string) => {
-        console.log(`Bulle ${id} cliquée — audio à intégrer plus tard`)
+    const handleBubbleClick = () => {
+        const audio = new Audio("/assets/QR1-Taches_v2.mp3")
+        audio.play().catch(err => console.error("Erreur lecture audio:", err))
     }
 
     const handleQuestionSubmit = async () => {
@@ -69,7 +70,7 @@ export default function Questions() {
                     <button
                         key={h.id}
                         className={`quest-bubble-btn pos-${i + 1}`}
-                        onClick={() => handleBubbleClick(h.id)}
+                        onClick={() => handleBubbleClick()}
                     >
                         <div className="quest-bubble">
                             <img src={h.img} alt={h.alt} className="quest-face-img" draggable={false} />
@@ -82,7 +83,7 @@ export default function Questions() {
                     <div className="quest-bubble quest-bubble--big">
                         <span className="quest-question-mark">?</span>
                     </div>
-                    <div className="quest-bubble-label">Une Question ?</div>
+                    <div className="quest-bubble-label">Une Question</div>
                 </button>
             </div>
 

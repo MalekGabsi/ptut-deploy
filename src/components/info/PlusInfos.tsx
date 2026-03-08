@@ -116,7 +116,7 @@ export default function PlusInfos() {
             </div>
             <div style={{ display: 'flex', alignItems: 'flex-start', gap: '16px' }}>
               <img
-                src="/assets/bastide.jpg"
+                src="/assets/bastide_3.jpg?v=20260308_2"
                 alt="Baptiste Vignaud"
                 style={{ width: '80px', height: '80px', borderRadius: '50%', objectFit: 'cover', border: '3px solid #fff', boxShadow: '0 4px 12px rgba(46,95,126,0.2)', flexShrink: 0 }}
               />
@@ -352,10 +352,10 @@ export default function PlusInfos() {
             en tous les cas de concert :
           </p>
           <ul className="pi-resources__list">
-            <li><a href="https://cerenef.org/" target="_blank" rel="noopener noreferrer">Centre de référence maladies rares constitutif CERENEF de Paris (AP-HP, Hôpital de la Pitié-Salpêtrière)</a></li>
-            <li><a href="https://www.chu-nantes.fr/la-nf1-1" target="_blank" rel="noopener noreferrer">Centre de référence maladies rares NF1 de l'enfant de Nantes</a></li>
-            <li><a href="https://www.chu-toulouse.fr/neurofibromatose-de-type-1-nf1" target="_blank" rel="noopener noreferrer">Centre de référence maladies rares NF1 de l'enfant de Toulouse</a></li>
-            <li><a href="https://www.chu-lyon.fr/service-neurologie-oncologie" target="_blank" rel="noopener noreferrer">Centre de référence maladies rares NF1 de l'enfant de Lyon</a></li>
+            <li><a href="https://cerenef.org/" target="_blank" rel="noopener noreferrer"><strong>Centre de référence maladies rares constitutif CERENEF de Paris (AP-HP, Hôpital de la Pitié-Salpêtrière)</strong></a></li>
+            <li><a href="https://www.chu-nantes.fr/la-nf1-1" target="_blank" rel="noopener noreferrer"><strong>Centre de référence maladies rares NF1 de l'enfant de Nantes</strong></a></li>
+            <li><a href="https://www.chu-toulouse.fr/neurofibromatose-de-type-1-nf1" target="_blank" rel="noopener noreferrer"><strong>Centre de référence maladies rares NF1 de l'enfant de Toulouse</strong></a></li>
+            <li><a href="https://www.chu-lyon.fr/service-neurologie-oncologie" target="_blank" rel="noopener noreferrer"><strong>Centre de référence maladies rares NF1 de l'enfant de Lyon</strong></a></li>
           </ul>
           <p style={{ marginTop: '16px' }}>
             Le CERENEF-Ped fait partie de la <a href="https://fimarad.org/" target="_blank" rel="noopener noreferrer"><strong>Filière santé maladies rares dermatologiques (Fimarad)</strong></a> qui

@@ -72,21 +72,17 @@
     border-radius: 50%;
 }
 
-/* Forme pour les bulles (ronde) */
+/* Forme pour les bulles (transparente, plus de cercle dur) */
 .ice-hotspot--bubble {
     border-radius: 50%;
-    background: rgba(0, 180, 255, 0.25);
-    /* Plus lumineux par défaut */
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    box-shadow: 0 0 20px rgba(0, 180, 255, 0.4);
-    /* Lueur plus présente */
+    background: transparent;
+    border: none;
+    box-shadow: none;
     animation: iceBubbleFloat 3s ease-in-out infinite alternate;
 }
 
 .ice-hotspot--bubble:hover {
-    background: rgba(0, 200, 255, 0.4);
-    box-shadow: 0 0 45px rgba(55, 0, 255, 0.8);
-    /* Très lumineux au survol */
+    /* Très lumineux au survol — supprimé pour éviter l'effet cercle */
     transform: translate(-50%, -50%) scale(1.15);
 }
 
@@ -174,20 +170,20 @@
 }
 
 .ice-hotspot--b6 {
-    left: 34%;
-    top: 75%;
+    left: 36%;
+    top: 70%;
 }
 
 .ice-hotspot--b8 {
     left: 60%;
-    top: 78%;
+    top: 70%;
 }
 
 .ice-hotspot--sign::after {
     content: '';
     position: absolute;
-    inset: -100%;
-    background: radial-gradient(circle, rgba(30, 80, 180, 0.5) 0%, rgba(30, 80, 180, 0) 70%);
+    inset: -50%;
+    background: radial-gradient(circle, rgba(60, 130, 255, 0.8) 0%, rgba(60, 130, 255, 0) 70%);
     filter: blur(25px);
     opacity: 0;
     transition: opacity 0.3s ease;
@@ -206,11 +202,53 @@
 }
 
 .ice-hotspot--bubble:hover {
-    border-color: transparent;
-    background: rgba(200, 240, 255, 0.4);
-    /* On garde le clair */
-    box-shadow: 0 0 45px rgba(200, 245, 255, 0.8);
     transform: translate(-50%, -50%) scale(1.15);
+}
+
+/* ── Halos imergés clairs et diffus (Effet Brouillard Remarquable) pour TOUTES les bulles ── */
+.ice-hotspot--bubble::after {
+    content: '';
+    position: absolute;
+    inset: -60%;
+    /* Équilibre entre spread et densité */
+    background: radial-gradient(circle, rgba(235, 250, 255, 0.95) 0%, rgba(150, 220, 255, 0.4) 40%, rgba(100, 200, 255, 0) 75%);
+    filter: blur(40px);
+    /* Flou généreux mais plus contenu pour plus de "punch" */
+    opacity: 0;
+    mix-blend-mode: screen;
+    /* Pour que ça "brille" physiquement sur le fond */
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+    border-radius: 50%;
+}
+
+.ice-hotspot--bubble:hover::after {
+    opacity: 1;
+    animation: iceHaloPulse 2s ease-in-out infinite;
+}
+
+/* ── Boost spécifique pour les petites bulles b6 et b8 (Luminosité équilibrée) ── */
+.ice-hotspot--b6::after,
+.ice-hotspot--b8::after {
+    inset: -140%;
+    /* Étalement beaucoup plus grand pour compenser la petite taille */
+    background: radial-gradient(circle, rgba(255, 255, 255, 1) 0%, rgba(180, 230, 255, 0.6) 40%, rgba(100, 200, 255, 0) 75%);
+    filter: blur(35px);
+    /* Un peu moins de flou pour garder du "punch" */
+}
+
+@keyframes iceHaloPulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        filter: blur(40px) brightness(1);
+    }
+
+    50% {
+        transform: scale(1.15);
+        filter: blur(35px) brightness(1.2);
+    }
 }
 
 /* ══════════════════════════════════════════════════════
