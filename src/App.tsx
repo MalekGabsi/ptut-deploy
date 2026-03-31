@@ -4,10 +4,21 @@ import PlusInfos from './components/info/PlusInfos'
 import Iceberg from './components/iceberg/Iceberg'
 import Questions from './components/questions/Questions'
 import BoussoleGuide from './components/boussole/BoussoleGuide'
+import { useEffect } from 'react'
 
 function GlobalBoussole() {
   const location = useLocation()
   const navigate = useNavigate()
+  useEffect(() => {
+    // Tracker chaque changement de page
+    if (window.gtag) {
+      window.gtag('event', 'page_view', {
+        page_path: location.pathname,
+        page_title: document.title,
+      });
+    }
+  }, [location]);
+
 
   // Ne pas afficher sur la page d'accueil (elle y est déjà)
   if (location.pathname === '/') return null
