@@ -12,7 +12,7 @@ function GlobalBoussole() {
   
   useEffect(() => {
     if (typeof window !== 'undefined' && typeof window.gtag !== 'undefined') {
-      window.gtag('config', 'G-JV6CZDM6Q5', {
+      window.gtag('config', 'G-HGYKH4FV1P', {
         page_path: location.pathname,
         page_title: document.title,
       });
