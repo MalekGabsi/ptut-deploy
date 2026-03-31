@@ -9,10 +9,10 @@ import { useEffect } from 'react'
 function GlobalBoussole() {
   const location = useLocation()
   const navigate = useNavigate()
+  
   useEffect(() => {
-    // Tracker chaque changement de page
-    if (window.gtag) {
-      window.gtag('event', 'page_view', {
+    if (typeof window !== 'undefined' && typeof window.gtag !== 'undefined') {
+      window.gtag('config', 'G-JV6CZDM6Q5', {
         page_path: location.pathname,
         page_title: document.title,
       });
