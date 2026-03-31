@@ -7,18 +7,17 @@
     <title>capitnf1</title>
     <!-- ✅ Google Analytics GA4 -->
     <!-- Google tag (gtag.js) -->
-      <script async src="https://www.googletagmanager.com/gtag/js?id=G-HGYKH4FV1P"></script>
-      <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-
-        gtag('config', 'G-HGYKH4FV1P', {
-          send_page_view: false,
-          cookie_domain: window.location.hostname
-        });
-
-      </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-HGYKH4FV1P"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    
+      // 🔥 IMPORTANT : envoyer la première page
+      gtag('config', 'G-HGYKH4FV1P', {
+        cookie_domain: 'auto'
+      });
+    </script>
   </head>
   <body>
     <div id="root"></div>
