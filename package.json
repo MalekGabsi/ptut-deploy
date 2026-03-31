@@ -10,6 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@google-analytics/data": "^5.2.1",
+    "@vercel/node": "^5.6.22",
     "@vimeo/player": "^2.30.3",
     "cors": "^2.8.6",
     "express": "^5.2.1",
