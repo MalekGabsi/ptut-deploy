@@ -12,14 +12,23 @@ function formatDate(d: string) {
 }
 
 export default async function handler(
-  _req: VercelRequest,
+  req: VercelRequest,
   res: VercelResponse
 ) {
-  try {
+  // ✅ CORS OBLIGATOIRE
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
+  // ✅ gérer preflight
+  if (req.method === 'OPTIONS') {
+    return res.status(200).end();
+  }
+
+  try {
     const dateRange = [{ startDate: '30daysAgo', endDate: 'today' }];
 
-    // ───────────── 1. TRAFIC GLOBAL ─────────────
+    // ───────────── TRAFIC ─────────────
     const [traffic] = await client.runReport({
       property,
       dateRanges: dateRange,
@@ -44,7 +53,7 @@ export default async function handler(
       pageViews: daily.reduce((a,b)=>a+b.pageViews,0),
     };
 
-    // ───────────── 2. PAGES ─────────────
+    // ───────────── PAGES ─────────────
     const [pagesRes] = await client.runReport({
       property,
       dateRanges: dateRange,
@@ -61,11 +70,13 @@ export default async function handler(
       path: r.dimensionValues?.[0]?.value,
       views: Number(r.metricValues?.[0]?.value || 0),
       users: Number(r.metricValues?.[1]?.value || 0),
-      bounceRate: Number(r.metricValues?.[2]?.value || 0).toFixed(1),
-      avgDuration: Number(r.metricValues?.[3]?.value || 0).toFixed(1),
+
+      // ✅ FIX IMPORTANT (plus de string)
+      bounceRate: Number(r.metricValues?.[2]?.value || 0),
+      avgDuration: Number(r.metricValues?.[3]?.value || 0),
     }));
 
-    // ───────────── 3. PAYS ─────────────
+    // ───────────── GEO ─────────────
     const [geoRes] = await client.runReport({
       property,
       dateRanges: dateRange,
@@ -78,7 +89,7 @@ export default async function handler(
       users: Number(r.metricValues?.[0]?.value || 0),
     }));
 
-    // ───────────── 4. VILLES ─────────────
+    // ───────────── VILLES ─────────────
     const [cityRes] = await client.runReport({
       property,
       dateRanges: dateRange,
@@ -91,7 +102,7 @@ export default async function handler(
       users: Number(r.metricValues?.[0]?.value || 0),
     }));
 
-    // ───────────── 5. DEVICES ─────────────
+    // ───────────── DEVICES ─────────────
     const [deviceRes] = await client.runReport({
       property,
       dateRanges: dateRange,
@@ -104,7 +115,7 @@ export default async function handler(
       users: Number(r.metricValues?.[0]?.value || 0),
     }));
 
-    // ───────────── 6. NAVIGATEURS ─────────────
+    // ───────────── BROWSERS ─────────────
     const [browserRes] = await client.runReport({
       property,
       dateRanges: dateRange,
@@ -117,7 +128,7 @@ export default async function handler(
       sessions: Number(r.metricValues?.[0]?.value || 0),
     }));
 
-    // ───────────── 7. SOURCES ─────────────
+    // ───────────── SOURCES ─────────────
     const [sourceRes] = await client.runReport({
       property,
       dateRanges: dateRange,
@@ -130,7 +141,7 @@ export default async function handler(
       sessions: Number(r.metricValues?.[0]?.value || 0),
     }));
 
-    // ───────────── 8. EVENTS ─────────────
+    // ───────────── EVENTS ─────────────
     const [eventRes] = await client.runReport({
       property,
       dateRanges: dateRange,
@@ -143,8 +154,8 @@ export default async function handler(
       count: Number(r.metricValues?.[0]?.value || 0),
     }));
 
-    // ───────────── RESPONSE FINAL ─────────────
-    res.status(200).json({
+    // ───────────── RESPONSE ─────────────
+    return res.status(200).json({
       daily,
       global,
       pages,
@@ -158,7 +169,9 @@ export default async function handler(
     });
 
   } catch (error) {
-    res.status(500).json({
+    console.error("API ERROR:", error);
+
+    return res.status(500).json({
       error: (error as Error).message,
     });
   }
